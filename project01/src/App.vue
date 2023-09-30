@@ -1,26 +1,27 @@
 <template>
-  <HelloWorld message="Hello World" />
+  <div id="app">
+    <Header />
+    <div id="content" class="content">
+      <router-view></router-view>
+    </div>
+  </div>
 </template>
 
 <script lang="ts">
 import Vue from 'vue';
-import HelloWorld from './components/HelloWorld.vue';
+import Header from '@/components/Header.vue';
 
 export default Vue.extend({
   name: 'App',
   components: {
-    HelloWorld,
+    Header,
   },
 });
 </script>
 
 <style>
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+  width: 100%;
+  min-height: 100vh;
 }
 </style>
