@@ -11,6 +11,7 @@ const router = new VueRouter({
     { path: '/', component: Home },
     { path: '/about', component: About },
   ],
+  linkExactActiveClass: 'active',
 });
 
 export default router;
