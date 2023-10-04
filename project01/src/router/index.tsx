@@ -5,12 +5,14 @@ import About from '@/views/About.vue';
 
 Vue.use(VueRouter);
 
+const routes = [
+  { path: '/', component: Home },
+  { path: '/about', component: About },
+];
+
 const router = new VueRouter({
   mode: 'history',
-  routes: [
-    { path: '/', component: Home },
-    { path: '/about', component: About },
-  ],
+  routes,
   linkExactActiveClass: 'active',
 });
 
