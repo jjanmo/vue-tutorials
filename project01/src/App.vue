@@ -8,7 +8,7 @@
 
 <script lang="ts">
 import Vue from 'vue';
-import Layout from '@/components/Layout.vue';
+import Layout from '@/components/common/Layout.vue';
 
 export default Vue.extend({
   name: 'App',
