@@ -58,37 +58,3 @@ export const links: Link[] = [
     version: 3,
   },
 ];
-
-interface Todo {
-  id: string;
-  content: string;
-  done: boolean;
-}
-
-export const todos: Todo[] = [
-  {
-    id: '1',
-    content: '자바스크립트 공부하기',
-    done: false,
-  },
-  {
-    id: '2',
-    content: '뷰 공부하기',
-    done: false,
-  },
-  {
-    id: '3',
-    content: '타입스크립트 공부하기',
-    done: false,
-  },
-  {
-    id: '4',
-    content: '폼입력 방식 공부하기',
-    done: false,
-  },
-  {
-    id: '5',
-    content: '행복하게 공부하기',
-    done: false,
-  },
-];

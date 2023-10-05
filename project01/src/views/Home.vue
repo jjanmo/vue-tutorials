@@ -40,7 +40,7 @@
 </template>
 <script lang="ts">
 import Vue from 'vue';
-import { links } from '@/constants';
+import { links } from '@/constants/links';
 import { BIconCheckSquareFill, BIconCheckSquare } from 'bootstrap-vue';
 
 export default Vue.extend({
