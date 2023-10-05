@@ -23,8 +23,9 @@ export const links: Link[] = [
   },
   {
     type: 'document',
-    title: '15 VUE JS Project Ideas: Beginner to Expert [With tutorial]',
-    url: 'https://nerdjfpb.medium.com/15-vue-js-project-ideas-beginner-to-expert-with-tutorial-9a315d184a91',
+    title:
+      '21 Vue.js Example Projects to Learn From (Open-source, Beginner to Intermediate Level)',
+    url: 'https://dev.to/syakirurahman/21-vue-js-example-projects-to-learn-from-open-source-beginner-to-intermediate-level-5bnk',
     status: 'doing',
     version: 2,
   },
@@ -55,5 +56,39 @@ export const links: Link[] = [
     url: 'https://v3-docs.vuejs-korea.org/',
     status: 'todo',
     version: 3,
+  },
+];
+
+interface Todo {
+  id: string;
+  content: string;
+  done: boolean;
+}
+
+export const todos: Todo[] = [
+  {
+    id: '1',
+    content: '자바스크립트 공부하기',
+    done: false,
+  },
+  {
+    id: '2',
+    content: '뷰 공부하기',
+    done: false,
+  },
+  {
+    id: '3',
+    content: '타입스크립트 공부하기',
+    done: false,
+  },
+  {
+    id: '4',
+    content: '폼입력 방식 공부하기',
+    done: false,
+  },
+  {
+    id: '5',
+    content: '행복하게 공부하기',
+    done: false,
   },
 ];

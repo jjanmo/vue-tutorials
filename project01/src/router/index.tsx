@@ -1,13 +1,13 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
 import Home from '@/views/Home.vue';
-import About from '@/views/About.vue';
+import TodoAppVue from '@/views/TodoApp.vue';
 
 Vue.use(VueRouter);
 
 const routes = [
-  { path: '/', component: Home },
-  { path: '/about', component: About },
+  { path: '/', name: 'home', component: Home },
+  { path: '/todoapp', name: 'todoapp', component: TodoAppVue },
 ];
 
 const router = new VueRouter({
