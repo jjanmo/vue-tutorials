@@ -10,7 +10,7 @@
 
 <script lang="ts">
 import Vue from 'vue';
-import Header from '@/components/Header.vue';
+import Header from './Header.vue';
 
 export default Vue.extend({
   components: {
@@ -21,7 +21,7 @@ export default Vue.extend({
 
 <style scoped>
 .content {
-  width: 840px;
+  max-width: 840px;
   height: 100%;
   padding: 3rem 1rem;
   margin: auto;
