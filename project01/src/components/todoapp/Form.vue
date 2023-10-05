@@ -1,8 +1,8 @@
 <template>
   <div>
-    <form @submit="onsubmit">
+    <form @submit.prevent="onSubmit" autocomplete="off">
       <label for="newtodo">New ToDo</label>
-      <input id="newtodo" @input="onchange" :value="value" />
+      <input id="newtodo" @input="onChange" :value="value" />
       <button class="text-center">Add ToDo</button>
     </form>
   </div>
@@ -13,7 +13,7 @@ import Vue from 'vue';
 
 export default Vue.extend({
   name: 'Form',
-  props: ['value', 'onsubmit', 'onchange'],
+  props: ['value', 'onSubmit', 'onChange'],
 });
 </script>
 

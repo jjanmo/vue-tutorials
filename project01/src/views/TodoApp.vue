@@ -1,8 +1,8 @@
 <template>
   <div class="container">
     <h1 class="text-center">ToDo App</h1>
-    <Form :value="value" :onsubmit="handleSubmit" :onchange="handleChange" />
-    <List :ondelete="deleteTodo" />
+    <Form :value="value" :onSubmit="handleSubmit" :onChange="handleChange" />
+    <List :onDelete="deleteTodo" :onCheck="updateStatus" :todos="todos" />
   </div>
 </template>
 
@@ -10,8 +10,12 @@
 import Vue from 'vue';
 import List from '@/components/todoapp/List.vue';
 import Form from '@/components/todoapp/Form.vue';
-import { todos } from '@/constants';
 
+interface Todo {
+  id: string;
+  content: string;
+  done: boolean;
+}
 export default Vue.extend({
   components: {
     Form,
@@ -19,13 +23,12 @@ export default Vue.extend({
   },
   data() {
     return {
-      todos,
+      todos: [] as Todo[],
       value: '',
     };
   },
   methods: {
-    handleSubmit(e: Event) {
-      e.preventDefault();
+    handleSubmit() {
       if (!this.value) return;
 
       this.todos.push({
