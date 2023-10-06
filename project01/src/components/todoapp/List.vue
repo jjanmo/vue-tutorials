@@ -1,13 +1,16 @@
 <template>
   <div>
     <h2>ToDo List</h2>
-    <div v-if="todos.length === 0" class="text-center mt-4 fs-5">
-      Empty list
-    </div>
+    <div v-if="todos.length === 0" class="text-center m-4 fs-5">Empty list</div>
     <ul v-else>
       <li class="item" v-for="todo of todos" :key="todo.id">
         <div class="content">
-          <input type="checkbox" :id="todo.id" @change="onCheck(todo.id)" />
+          <input
+            type="checkbox"
+            :id="todo.id"
+            @change="onCheck(todo.id)"
+            value="todo.done"
+          />
           <label :for="todo.id" :class="{ active: todo.done }">
             {{ todo.content }}
           </label>

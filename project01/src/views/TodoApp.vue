@@ -2,7 +2,17 @@
   <div class="container">
     <h1 class="text-center">ToDo App</h1>
     <Form :value="value" :onSubmit="handleSubmit" :onChange="handleChange" />
-    <List :onDelete="deleteTodo" :onCheck="updateStatus" :todos="todos" />
+    <List
+      :onDelete="deleteTodo"
+      :onCheck="updateStatus"
+      :todos="displayedTodos"
+    />
+    <Controller
+      :onFilter="filterTodos"
+      :onCheckAll="toggleAll"
+      :leftItem="displayedTodos.filter((todo) => !todo.done).length"
+      todos="displayedTodos"
+    />
   </div>
 </template>
 
@@ -10,8 +20,9 @@
 import Vue from 'vue';
 import List from '@/components/todoapp/List.vue';
 import Form from '@/components/todoapp/Form.vue';
+import Controller from '@/components/todoapp/Controller.vue';
 
-interface Todo {
+export interface Todo {
   id: string;
   content: string;
   done: boolean;
@@ -20,22 +31,28 @@ export default Vue.extend({
   components: {
     Form,
     List,
+    Controller,
   },
   data() {
     return {
-      todos: [] as Todo[],
+      originalTodos: [] as Todo[],
+      displayedTodos: [] as Todo[],
       value: '',
     };
   },
   methods: {
+    synchonize() {
+      this.displayedTodos = this.originalTodos;
+    },
     handleSubmit() {
       if (!this.value) return;
 
-      this.todos.push({
-        id: String(this.todos.length + 1),
+      this.originalTodos.push({
+        id: String(this.originalTodos.length + 1),
         content: this.value,
         done: false,
       });
+      this.synchonize();
       this.value = '';
     },
     handleChange(e: Event) {
@@ -43,12 +60,29 @@ export default Vue.extend({
       this.value = value;
     },
     updateStatus(id: string) {
-      this.todos = this.todos.map((todo) =>
+      this.originalTodos = this.originalTodos.map((todo) =>
         todo.id === id ? { ...todo, done: !todo.done } : todo
       );
+      this.synchonize();
     },
     deleteTodo(id: string) {
-      this.todos = this.todos.filter((todo) => todo.id !== id);
+      this.originalTodos = this.originalTodos.filter((todo) => todo.id !== id);
+      this.synchonize();
+    },
+    toggleAll(checked: boolean) {
+      this.originalTodos = this.originalTodos.map((todo) => ({
+        ...todo,
+        done: checked,
+      }));
+      this.synchonize();
+    },
+    filterTodos(type: string) {
+      if (type === 'all') this.synchonize();
+      else {
+        this.displayedTodos = this.originalTodos.filter((todo) =>
+          type === 'done' ? todo.done : !todo.done
+        );
+      }
     },
   },
 });
