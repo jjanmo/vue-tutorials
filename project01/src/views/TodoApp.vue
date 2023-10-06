@@ -5,13 +5,14 @@
     <List
       @delete-todo="deleteTodo"
       @toggle-status="toggleStatus"
-      :todos="displayedTodos"
+      :todos="selectByFilter()"
     />
     <Controller
-      :onFilter="filterTodos"
-      :onCheckAll="toggleAll"
-      :leftItem="displayedTodos.filter((todo) => !todo.done).length"
-      todos="displayedTodos"
+      @set-filter-type="setFilterType"
+      @toggle-all="toggleAll"
+      :filterType="filterType"
+      :todos="selectByFilter()"
+      :leftItem="getLeftItem()"
     />
   </div>
 </template>
@@ -35,24 +36,20 @@ export default Vue.extend({
   },
   data() {
     return {
-      originalTodos: [] as Todo[],
-      displayedTodos: [] as Todo[],
+      todos: [] as Todo[],
       value: '',
+      filterType: 'all',
     };
   },
   methods: {
-    synchonize() {
-      this.displayedTodos = this.originalTodos;
-    },
     handleSubmit() {
       if (!this.value) return;
 
-      this.originalTodos.push({
-        id: String(this.originalTodos.length + 1),
+      this.todos.push({
+        id: String(this.todos.length + 1),
         content: this.value,
         done: false,
       });
-      this.synchonize();
       this.value = '';
     },
     handleChange(e: Event) {
@@ -61,30 +58,34 @@ export default Vue.extend({
     },
 
     deleteTodo(id: string) {
-      this.originalTodos = this.originalTodos.filter((todo) => todo.id !== id);
-      this.synchonize();
+      this.todos = this.todos.filter((todo) => todo.id !== id);
     },
     toggleStatus(id: string) {
-      this.originalTodos = this.originalTodos.map((todo) =>
+      this.todos = this.todos.map((todo) =>
         todo.id === id ? { ...todo, done: !todo.done } : todo
       );
-      this.synchonize();
     },
-
     toggleAll(checked: boolean) {
-      this.originalTodos = this.originalTodos.map((todo) => ({
+      this.todos = this.todos.map((todo) => ({
         ...todo,
         done: checked,
       }));
-      this.synchonize();
     },
-    filterTodos(type: string) {
-      if (type === 'all') this.synchonize();
+
+    setFilterType(type: string) {
+      this.filterType = type;
+    },
+    selectByFilter() {
+      if (this.filterType === 'all') return this.todos;
       else {
-        this.displayedTodos = this.originalTodos.filter((todo) =>
-          type === 'done' ? todo.done : !todo.done
+        return this.todos.filter((todo) =>
+          this.filterType === 'done' ? todo.done : !todo.done
         );
       }
+    },
+
+    getLeftItem() {
+      return this.selectByFilter().filter((todo) => !todo.done).length;
     },
   },
 });

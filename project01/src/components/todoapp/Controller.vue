@@ -5,7 +5,7 @@
         <input
           type="checkbox"
           id="check-all"
-          @change="onCheckAll(checked)"
+          @change="toggleAll(checked)"
           v-model="checked"
         />
         <label for="check-all">Check All</label>
@@ -16,21 +16,21 @@
       <button
         :class="{ active: filterType === 'all' }"
         type="button"
-        @click="updateFilterType('all')"
+        @click="setFilterType('all')"
       >
         All
       </button>
       <button
         :class="{ active: filterType === 'todo' }"
         type="button"
-        @click="updateFilterType('todo')"
+        @click="setFilterType('todo')"
       >
         Todo
       </button>
       <button
-        :class="{ active: filterType === 'done' }"
         type="button"
-        @click="updateFilterType('done')"
+        :class="{ active: filterType === 'done' }"
+        @click="setFilterType('done')"
       >
         Done
       </button>
@@ -42,22 +42,18 @@
 import Vue from 'vue';
 
 export default Vue.extend({
-  props: ['todos', 'onCheckAll', 'onFilter', 'leftItem'],
+  props: ['filterType', 'todos', 'leftItem'],
   data() {
     return {
-      filterType: 'all',
       checked: false,
     };
   },
   methods: {
-    updateFilterType(type: string) {
-      this.filterType = type;
-      this.onFilter(type);
+    setFilterType(type: string) {
+      this.$emit('set-filter-type', type);
     },
-  },
-  watch: {
-    checked() {
-      console.log('>>>', this.checked);
+    toggleAll(checked: boolean) {
+      this.$emit('toggle-all', checked);
     },
   },
 });
