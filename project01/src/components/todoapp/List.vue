@@ -8,14 +8,18 @@
           <input
             type="checkbox"
             :id="todo.id"
-            @change="onCheck(todo.id)"
-            value="todo.done"
+            :checked="todo.done"
+            @change="toggleStatus(todo.id)"
           />
           <label :for="todo.id" :class="{ active: todo.done }">
             {{ todo.content }}
           </label>
         </div>
-        <button class="remove-button" type="button" @click="onDelete(todo.id)">
+        <button
+          class="remove-button"
+          type="button"
+          @click="deleteTodo(todo.id)"
+        >
           Remove
         </button>
       </li>
@@ -27,7 +31,15 @@
 import Vue from 'vue';
 
 export default Vue.extend({
-  props: ['onDelete', 'todos', 'onCheck'],
+  props: ['todos'],
+  methods: {
+    deleteTodo(id: string) {
+      this.$emit('delete-todo', id);
+    },
+    toggleStatus(id: string) {
+      this.$emit('toggle-status', id);
+    },
+  },
 });
 </script>
 

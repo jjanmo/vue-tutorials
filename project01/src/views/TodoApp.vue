@@ -3,8 +3,8 @@
     <h1 class="text-center">ToDo App</h1>
     <Form :value="value" :onSubmit="handleSubmit" :onChange="handleChange" />
     <List
-      :onDelete="deleteTodo"
-      :onCheck="updateStatus"
+      @delete-todo="deleteTodo"
+      @toggle-status="toggleStatus"
       :todos="displayedTodos"
     />
     <Controller
@@ -59,16 +59,18 @@ export default Vue.extend({
       const value = (e.target as HTMLInputElement).value;
       this.value = value;
     },
-    updateStatus(id: string) {
+
+    deleteTodo(id: string) {
+      this.originalTodos = this.originalTodos.filter((todo) => todo.id !== id);
+      this.synchonize();
+    },
+    toggleStatus(id: string) {
       this.originalTodos = this.originalTodos.map((todo) =>
         todo.id === id ? { ...todo, done: !todo.done } : todo
       );
       this.synchonize();
     },
-    deleteTodo(id: string) {
-      this.originalTodos = this.originalTodos.filter((todo) => todo.id !== id);
-      this.synchonize();
-    },
+
     toggleAll(checked: boolean) {
       this.originalTodos = this.originalTodos.map((todo) => ({
         ...todo,
