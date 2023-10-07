@@ -1,8 +1,8 @@
 <template>
   <div>
-    <form @submit.prevent="onSubmit" autocomplete="off">
+    <form @submit.prevent="handleSubmit" autocomplete="off">
       <label for="newtodo">New ToDo</label>
-      <input id="newtodo" @input="onChange" :value="value" />
+      <input id="newtodo" @input="handleChange" :value="value" />
       <button class="text-center">Add ToDo</button>
     </form>
   </div>
@@ -13,7 +13,16 @@ import Vue from 'vue';
 
 export default Vue.extend({
   name: 'Form',
-  props: ['value', 'onSubmit', 'onChange'],
+  props: ['value'],
+  methods: {
+    handleSubmit() {
+      this.$emit('handle-submit');
+    },
+    handleChange(e: Event) {
+      const value = (e.target as HTMLInputElement).value;
+      this.$emit('handle-change', value);
+    },
+  },
 });
 </script>
 

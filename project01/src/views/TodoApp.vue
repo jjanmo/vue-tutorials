@@ -1,7 +1,11 @@
 <template>
   <div class="container">
     <h1 class="text-center">ToDo App</h1>
-    <Form :value="value" :onSubmit="handleSubmit" :onChange="handleChange" />
+    <Form
+      @handle-submit="handleSubmit"
+      @handle-change="handleChange"
+      :value="value"
+    />
     <List
       @delete-todo="deleteTodo"
       @toggle-status="toggleStatus"
@@ -52,8 +56,7 @@ export default Vue.extend({
       });
       this.value = '';
     },
-    handleChange(e: Event) {
-      const value = (e.target as HTMLInputElement).value;
+    handleChange(value: string) {
       this.value = value;
     },
 
