@@ -10,14 +10,10 @@
       @delete-todo="deleteTodo"
       @toggle-status="toggleStatus"
       :todos="selectByFilter()"
-    />
-    <Controller
-      @set-filter-type="setFilterType"
-      @toggle-all="toggleAll"
       :filterType="filterType"
-      :todos="selectByFilter()"
-      :leftItem="getLeftItem()"
+      :setFilterType="setFilterType"
     />
+    <Stat @toggle-all="toggleAll" :leftItem="getLeftItem()" />
   </div>
 </template>
 
@@ -25,7 +21,7 @@
 import Vue from 'vue';
 import List from '@/components/todoapp/List.vue';
 import Form from '@/components/todoapp/Form.vue';
-import Controller from '@/components/todoapp/Controller.vue';
+import Stat from '@/components/todoapp/Stat.vue';
 
 export interface Todo {
   id: string;
@@ -36,7 +32,7 @@ export default Vue.extend({
   components: {
     Form,
     List,
-    Controller,
+    Stat,
   },
   data() {
     return {

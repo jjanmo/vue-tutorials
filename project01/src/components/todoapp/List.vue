@@ -1,6 +1,13 @@
 <template>
   <div>
-    <h2>ToDo List</h2>
+    <div class="title">
+      <h2>ToDo List</h2>
+      <FilterButtons
+        :todos="todos"
+        :filterType="filterType"
+        :setFilterType="setFilterType"
+      />
+    </div>
     <div v-if="todos.length === 0" class="text-center m-4 fs-5">Empty list</div>
     <ul v-else>
       <li class="item" v-for="todo of todos" :key="todo.id">
@@ -29,9 +36,13 @@
 
 <script lang="ts">
 import Vue from 'vue';
+import FilterButtons from '@/components/todoapp/FilterButtons.vue';
 
 export default Vue.extend({
-  props: ['todos'],
+  props: ['todos', 'filterType', 'setFilterType'],
+  components: {
+    FilterButtons,
+  },
   methods: {
     deleteTodo(id: string) {
       this.$emit('delete-todo', id);
@@ -44,14 +55,20 @@ export default Vue.extend({
 </script>
 
 <style scoped>
-h2 {
-  display: inline-block;
-  width: 100%;
+.title {
   padding-bottom: 10px;
-  margin: 10px 0 20px;
+  margin: 20px 0;
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 2px solid #7b7c7e;
+}
+.title h2 {
+  margin: 0;
   font-size: 20px;
   font-weight: 600;
-  border-bottom: 2px solid #7b7c7e;
+}
+ul {
+  margin: 30px 0;
 }
 .item {
   width: 95%;
@@ -65,7 +82,7 @@ h2 {
   user-select: none;
 }
 .item + .item {
-  margin-top: 10px;
+  margin-top: 15px;
 }
 .item input {
   margin-right: 10px;
