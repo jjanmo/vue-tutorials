@@ -9,11 +9,11 @@ import '@/styles/global.css';
 
 Vue.use(BootstrapVue);
 Vue.use(IconsPlugin);
+Vue.use(store);
 
 Vue.config.productionTip = false;
 
 new Vue({
   router,
-  store,
   render: (h) => h(App),
 }).$mount('#app');
