@@ -1,5 +1,3 @@
-import { Module } from 'vuex';
-import { RootState } from '@/store';
 import { v4 } from 'uuid';
 export interface Todo {
   id: string;
@@ -36,7 +34,7 @@ const mutations = {};
 const actions = {};
 const getters = {};
 
-const todos: Module<TodosState, RootState> = {
+const todos = {
   namespaced: true,
   state,
   mutations,

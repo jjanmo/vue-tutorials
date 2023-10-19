@@ -25,10 +25,15 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue';
+import { defineComponent } from 'vue';
 
-export default Vue.extend({
-  props: ['filterType', 'todos', 'setFilterType'],
+export default defineComponent({
+  props: ['filterType', 'setFilterType'],
+  computed: {
+    // todos() {
+    //   return this.$store.state.todos;
+    // },
+  },
 });
 </script>
 

@@ -7,10 +7,10 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue';
+import { defineComponent } from 'vue';
 import Layout from '@/components/common/Layout.vue';
 
-export default Vue.extend({
+export default defineComponent({
   name: 'App',
   components: {
     Layout,
@@ -18,7 +18,7 @@ export default Vue.extend({
 });
 </script>
 
-<style>
+<style scoped>
 #app {
   width: 100%;
   min-height: 100vh;

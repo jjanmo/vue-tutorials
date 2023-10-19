@@ -9,14 +9,13 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue';
 import Header from './Header.vue';
 
-export default Vue.extend({
+export default {
   components: {
     Header,
   },
-});
+};
 </script>
 
 <style scoped>

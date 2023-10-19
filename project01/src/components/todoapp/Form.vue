@@ -3,15 +3,15 @@
     <form @submit.prevent="handleSubmit" autocomplete="off">
       <label for="newtodo">New ToDo</label>
       <input id="newtodo" @input="handleChange" :value="value" />
-      <button class="text-center">Add ToDo</button>
+      <button>Add ToDo</button>
     </form>
   </div>
 </template>
 
 <script lang="ts">
-import Vue from 'vue';
+import { defineComponent } from 'vue';
 
-export default Vue.extend({
+export default defineComponent({
   name: 'Form',
   props: ['value'],
   methods: {
@@ -49,5 +49,7 @@ button {
   background-color: #c7ecee;
   font-weight: 600;
   font-size: large;
+  text-align: center;
+  cursor: pointer;
 }
 </style>

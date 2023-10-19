@@ -39,11 +39,11 @@
   </div>
 </template>
 <script lang="ts">
-import Vue from 'vue';
+import { defineComponent } from 'vue';
 import { links } from '@/constants/links';
-import { BIconCheckSquareFill, BIconCheckSquare } from 'bootstrap-vue';
+import { BIconCheckSquareFill, BIconCheckSquare } from 'bootstrap-icons-vue';
 
-export default Vue.extend({
+export default defineComponent({
   name: 'Home',
   components: {
     BIconCheckSquareFill,
@@ -57,9 +57,9 @@ export default Vue.extend({
   },
   methods: {
     handleClick(e: Event) {
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-      const type = (e.target as HTMLButtonElement).dataset.type!;
+      const type = (e.target as HTMLButtonElement).dataset.type as string;
       this.selected = type;
+
       if (type === 'all') this.links = links;
       else if (type === 'v2')
         this.links = links.filter((link) => link.version === 2);

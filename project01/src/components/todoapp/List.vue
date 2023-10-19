@@ -8,7 +8,7 @@
         :setFilterType="setFilterType"
       />
     </div>
-    <div v-if="todos.length === 0" class="text-center m-4 fs-5">Empty list</div>
+    <div v-if="todos.length === 0">Empty list</div>
     <ul v-else>
       <li class="item" v-for="todo of todos" :key="todo.id">
         <div class="content">
@@ -35,10 +35,10 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue';
+import { defineComponent } from 'vue';
 import FilterButtons from '@/components/todoapp/FilterButtons.vue';
 
-export default Vue.extend({
+export default defineComponent({
   props: ['todos', 'filterType', 'setFilterType'],
   components: {
     FilterButtons,

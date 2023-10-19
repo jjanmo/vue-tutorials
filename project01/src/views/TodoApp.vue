@@ -18,7 +18,7 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue';
+import { defineComponent } from 'vue';
 import List from '@/components/todoapp/List.vue';
 import Form from '@/components/todoapp/Form.vue';
 import Stat from '@/components/todoapp/Stat.vue';
@@ -28,7 +28,7 @@ export interface Todo {
   content: string;
   done: boolean;
 }
-export default Vue.extend({
+export default defineComponent({
   components: {
     Form,
     List,
@@ -82,7 +82,6 @@ export default Vue.extend({
         );
       }
     },
-
     getLeftItem() {
       return this.selectByFilter().filter((todo) => !todo.done).length;
     },
