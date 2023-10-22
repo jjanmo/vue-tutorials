@@ -2,11 +2,7 @@
   <div>
     <div class="title">
       <h2>ToDo List</h2>
-      <FilterButtons
-        :todos="todos"
-        :filterType="filterType"
-        :setFilterType="setFilterType"
-      />
+      <FilterButtons :setFilterType="setFilterType" />
     </div>
     <div v-if="todos.length === 0">Empty list</div>
     <ul v-else>
