@@ -4,28 +4,31 @@
       <input
         type="checkbox"
         id="check-all"
-        @change="toggleAll(checked)"
+        @change="handleAllClick(checked)"
         v-model="checked"
       />
       <label for="check-all">Check All</label>
     </div>
-    <div>{{ leftItem }} left</div>
+    <div>{{ leftTodos }} left</div>
   </div>
 </template>
 
 <script lang="ts">
+import { mapGetters } from 'vuex';
 import { defineComponent } from 'vue';
 
 export default defineComponent({
-  props: ['leftItem'],
   data() {
     return {
       checked: false,
     };
   },
+  computed: {
+    ...mapGetters('todos', ['filteredTodos', 'leftTodos']),
+  },
   methods: {
-    toggleAll(checked: boolean) {
-      this.$emit('toggle-all', checked);
+    handleAllClick(checked: boolean) {
+      this.$store.commit('todos/toggleAll', checked);
     },
   },
 });

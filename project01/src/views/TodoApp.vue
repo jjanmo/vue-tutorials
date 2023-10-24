@@ -1,9 +1,9 @@
 <template>
   <div class="container">
-    <h1 class="text-center">ToDo App</h1>
+    <h1>ToDo App</h1>
     <Form />
     <List />
-    <Stat @toggle-all="toggleAll" :leftItem="getLeftItem()" />
+    <Stat />
   </div>
 </template>
 
@@ -31,37 +31,6 @@ export default defineComponent({
       filterType: 'all',
     };
   },
-  methods: {
-    deleteTodo(id: string) {
-      this.todos = this.todos.filter((todo) => todo.id !== id);
-    },
-    toggleStatus(id: string) {
-      this.todos = this.todos.map((todo) =>
-        todo.id === id ? { ...todo, done: !todo.done } : todo
-      );
-    },
-    toggleAll(checked: boolean) {
-      this.todos = this.todos.map((todo) => ({
-        ...todo,
-        done: checked,
-      }));
-    },
-
-    setFilterType(type: string) {
-      this.filterType = type;
-    },
-    selectByFilter() {
-      if (this.filterType === 'all') return this.todos;
-      else {
-        return this.todos.filter((todo) =>
-          this.filterType === 'done' ? todo.done : !todo.done
-        );
-      }
-    },
-    getLeftItem() {
-      return this.selectByFilter().filter((todo) => !todo.done).length;
-    },
-  },
 });
 </script>
 
@@ -70,5 +39,8 @@ export default defineComponent({
   width: 80%;
   margin: auto;
   overflow: hidden;
+}
+h1 {
+  text-align: center;
 }
 </style>

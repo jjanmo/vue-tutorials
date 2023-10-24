@@ -1,5 +1,5 @@
-import { v4 } from 'uuid';
 import { RootState } from '..';
+
 export interface Todo {
   id: string;
   content: string;
@@ -24,11 +24,18 @@ const mutations = {
     const finded = state.data.find((todo) => todo.id === id) as Todo;
     finded.done = !finded.done;
   },
+  toggleAll: (state: TodosState, checked: boolean) => {
+    state.data = state.data.map((todo) => ({
+      ...todo,
+      done: checked,
+    }));
+  },
 };
 
 const getters = {
-  leftTodos: (state: TodosState) => {
-    return state.data.filter((todo) => !todo.done).length;
+  leftTodos: (_: unknown, getters: any) => {
+    return (getters.filteredTodos as Todo[]).filter((todo) => !todo.done)
+      .length;
   },
   filteredTodos: (state: TodosState, _: unknown, rootState: RootState) => {
     const filterType = rootState.filter.type;
