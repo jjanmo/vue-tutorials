@@ -10,17 +10,28 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue';
+import { v4 } from 'uuid';
 
 export default defineComponent({
   name: 'Form',
-  props: ['value'],
+  data() {
+    return {
+      value: '',
+    };
+  },
   methods: {
     handleSubmit() {
-      this.$emit('handle-submit');
+      if (!this.value) return;
+      const newTodo = {
+        id: v4(),
+        content: this.value,
+        done: false,
+      };
+      this.$store.commit('todos/addTodo', { todo: newTodo });
+      this.value = '';
     },
     handleChange(e: Event) {
-      const value = (e.target as HTMLInputElement).value;
-      this.$emit('handle-change', value);
+      this.value = (e.target as HTMLInputElement).value;
     },
   },
 });

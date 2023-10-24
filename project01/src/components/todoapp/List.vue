@@ -2,7 +2,7 @@
   <div>
     <div class="title">
       <h2>ToDo List</h2>
-      <FilterButtons :setFilterType="setFilterType" />
+      <FilterButtons />
     </div>
     <div v-if="todos.length === 0">Empty list</div>
     <ul v-else>
@@ -12,7 +12,7 @@
             type="checkbox"
             :id="todo.id"
             :checked="todo.done"
-            @change="toggleStatus(todo.id)"
+            @change="handleStatusChange(todo.id)"
           />
           <label :for="todo.id" :class="{ active: todo.done }">
             {{ todo.content }}
@@ -21,7 +21,7 @@
         <button
           class="remove-button"
           type="button"
-          @click="deleteTodo(todo.id)"
+          @click="handleDeleteButtonClick(todo.id)"
         >
           Remove
         </button>
@@ -32,19 +32,24 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue';
+import { mapGetters } from 'vuex';
 import FilterButtons from '@/components/todoapp/FilterButtons.vue';
 
 export default defineComponent({
-  props: ['todos', 'filterType', 'setFilterType'],
   components: {
     FilterButtons,
   },
+  computed: {
+    ...mapGetters('todos', {
+      todos: 'filteredTodos',
+    }),
+  },
   methods: {
-    deleteTodo(id: string) {
-      this.$emit('delete-todo', id);
+    handleDeleteButtonClick(id: string) {
+      this.$store.commit('todos/deleteTodo', id);
     },
-    toggleStatus(id: string) {
-      this.$emit('toggle-status', id);
+    handleStatusChange(id: string) {
+      this.$store.commit('todos/toggleStatus', id);
     },
   },
 });

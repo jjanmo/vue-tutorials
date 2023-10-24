@@ -1,18 +1,8 @@
 <template>
   <div class="container">
     <h1 class="text-center">ToDo App</h1>
-    <Form
-      @handle-submit="handleSubmit"
-      @handle-change="handleChange"
-      :value="value"
-    />
-    <List
-      @delete-todo="deleteTodo"
-      @toggle-status="toggleStatus"
-      :todos="selectByFilter()"
-      :filterType="filterType"
-      :setFilterType="setFilterType"
-    />
+    <Form />
+    <List />
     <Stat @toggle-all="toggleAll" :leftItem="getLeftItem()" />
   </div>
 </template>
@@ -42,20 +32,6 @@ export default defineComponent({
     };
   },
   methods: {
-    handleSubmit() {
-      if (!this.value) return;
-
-      this.todos.push({
-        id: String(this.todos.length + 1),
-        content: this.value,
-        done: false,
-      });
-      this.value = '';
-    },
-    handleChange(value: string) {
-      this.value = value;
-    },
-
     deleteTodo(id: string) {
       this.todos = this.todos.filter((todo) => todo.id !== id);
     },
