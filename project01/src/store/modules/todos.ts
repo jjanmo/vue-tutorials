@@ -4,10 +4,8 @@ export interface Todo {
   content: string;
   done: boolean;
 }
-export type FilterType = 'all' | 'todo' | 'done';
 export interface TodosState {
   data: Todo[];
-  filterType: FilterType;
 }
 
 const state: TodosState = {
@@ -28,7 +26,6 @@ const state: TodosState = {
       done: false,
     },
   ],
-  filterType: 'all',
 };
 const mutations = {};
 const actions = {};

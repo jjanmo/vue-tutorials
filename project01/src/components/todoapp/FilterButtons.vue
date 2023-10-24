@@ -4,21 +4,21 @@
       <button
         :class="{ active: filterType === 'all' }"
         type="button"
-        @click="setFilterType('all')"
+        @click="changeFilter('all')"
       >
         All
       </button>
       <button
         :class="{ active: filterType === 'todo' }"
         type="button"
-        @click="setFilterType('todo')"
+        @click="changeFilter('todo')"
       >
         Todo
       </button>
       <button
         type="button"
         :class="{ active: filterType === 'done' }"
-        @click="setFilterType('done')"
+        @click="changeFilter('done')"
       >
         Done
       </button>
@@ -28,15 +28,20 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue';
+import { FilterType } from '@/store/modules/filter';
 
 export default defineComponent({
-  props: ['setFilterType'],
   computed: {
     todos() {
       return this.$store.state.todos.data;
     },
     filterType() {
-      return this.$store.state.todos.filterType;
+      return this.$store.state.filter.type;
+    },
+  },
+  methods: {
+    changeFilter(type: FilterType) {
+      this.$store.commit('filter/changeFilter', type);
     },
   },
 });
