@@ -1,4 +1,5 @@
 import { v4 } from 'uuid';
+import { RootState } from '..';
 export interface Todo {
   id: string;
   content: string;
@@ -9,33 +10,40 @@ export interface TodosState {
 }
 
 const state: TodosState = {
-  data: [
-    {
-      id: v4(),
-      content: '자바스립트 공부하기',
-      done: false,
-    },
-    {
-      id: v4(),
-      content: '뷰로 만들기',
-      done: true,
-    },
-    {
-      id: v4(),
-      content: '헬로우 월드',
-      done: false,
-    },
-  ],
+  data: [],
 };
-const mutations = {};
-const actions = {};
-const getters = {};
+
+const mutations = {
+  addTodo: (state: TodosState, payload: { todo: Todo }) => {
+    state.data.push(payload.todo);
+  },
+  deleteTodo: (state: TodosState, id: string) => {
+    state.data = state.data.filter((todo) => todo.id !== id);
+  },
+  toggleStatus: (state: TodosState, id: string) => {
+    const finded = state.data.find((todo) => todo.id === id) as Todo;
+    finded.done = !finded.done;
+  },
+};
+
+const getters = {
+  leftTodos: (state: TodosState) => {
+    return state.data.filter((todo) => !todo.done).length;
+  },
+  filteredTodos: (state: TodosState, _: unknown, rootState: RootState) => {
+    const filterType = rootState.filter.type;
+    if (filterType === 'done') return state.data.filter((todo) => todo.done);
+    if (filterType === 'todo') return state.data.filter((todo) => !todo.done);
+    return state.data;
+  },
+};
+
+// const actions = {}; // 비동기처리인 경우에 사용
 
 const todos = {
   namespaced: true,
   state,
   mutations,
-  actions,
   getters,
 };
 
