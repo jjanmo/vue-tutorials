@@ -18,7 +18,7 @@ export const links: Link[] = [
     type: 'video',
     title: '[코지코더] Vue.js 2 기초 익히기 기본 강좌',
     url: 'https://www.youtube.com/playlist?list=PLB7CpjPWqHOtYP7P_0Ls9XNed0NLvmkAh',
-    status: 'doing',
+    status: 'done',
     version: 2,
   },
   {
