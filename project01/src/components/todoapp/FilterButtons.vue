@@ -4,21 +4,21 @@
       <button
         :class="{ active: filterType === 'all' }"
         type="button"
-        @click="changeFilter('all')"
+        @click="changeFilterType('all')"
       >
         All
       </button>
       <button
         :class="{ active: filterType === 'todo' }"
         type="button"
-        @click="changeFilter('todo')"
+        @click="changeFilterType('todo')"
       >
         Todo
       </button>
       <button
         type="button"
         :class="{ active: filterType === 'done' }"
-        @click="changeFilter('done')"
+        @click="changeFilterType('done')"
       >
         Done
       </button>
@@ -28,20 +28,19 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue';
+import { mapMutations, mapState } from 'vuex';
 import { FilterType } from '@/store/modules/filter';
 
 export default defineComponent({
   computed: {
-    todos() {
-      return this.$store.state.todos.data;
-    },
-    filterType() {
-      return this.$store.state.filter.type;
-    },
+    ...mapState('filter', {
+      filterType: 'type',
+    }),
   },
   methods: {
-    changeFilter(type: FilterType) {
-      this.$store.commit('filter/changeFilter', type);
+    ...mapMutations('filter', ['changeFilter']),
+    changeFilterType(type: FilterType) {
+      this.changeFilter(type);
     },
   },
 });
