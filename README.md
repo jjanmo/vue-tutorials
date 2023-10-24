@@ -2,7 +2,7 @@
 
 ## Project01 - Start [-ing]
 
-> Make tiny projects using `Vue v2` (boilerplate vue-cli)
+> Make tiny projects using **Vue ~~v2~~ v3** (boilerplate `vue-cli`)
 
 <details>
   <summary>시작</summary>
@@ -12,9 +12,18 @@
 </details>
 
 <details>
-  <summary>참고자료</summary>
+  <summary>Content</summary>
+  
+  - [x] TodoApp
 
-- [Vue2 공식사이트](https://v2.ko.vuejs.org/)
-- [Vue : 웹 게임만들기](https://www.youtube.com/playlist?list=PLcqDmjxt30RsdnPeU0ogHFMoggSQ_d7ao)
-- [Vue.js 입문](https://www.youtube.com/watch?v=sqH0u8wN4Rs&list=PLqbWuGdVBJd3T1y8tVBdeuX-cDL3LEzt_&index=5&t=147s)
+- [ ] LoL 챔피언 순서 맞추기
+
 </details>
+
+## Project02
+
+> Vue2 + Typescript + Webpack + SSR
+
+> 현재 회사의 레거시 뷰 프로젝트에서 사용하는 스택과 버전처럼 초기 구성을 만들어보기!
+
+> use class component
