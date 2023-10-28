@@ -33,6 +33,7 @@ const mutations = {
 };
 
 const getters = {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   leftTodos: (_: unknown, getters: any) => {
     return (getters.filteredTodos as Todo[]).filter((todo) => !todo.done)
       .length;
