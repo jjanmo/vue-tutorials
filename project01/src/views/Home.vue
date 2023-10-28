@@ -24,8 +24,8 @@
         Version3
       </button>
     </div>
-    <ul v-for="(link, i) of links" :key="i">
-      <li>
+    <ul>
+      <li v-for="(link, i) of links" :key="i">
         <span class="icon" v-if="link.status === 'done'">
           <BIconCheckSquareFill color="#22a6b3" />
         </span>
@@ -92,5 +92,14 @@ button + button {
   background-color: #22a6b3;
   color: white;
   font-weight: 500;
+}
+li {
+  padding: 6px 0;
+  display: flex;
+  align-items: center;
+}
+li .icon {
+  display: flex;
+  align-items: center;
 }
 </style>
