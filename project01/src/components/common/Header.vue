@@ -26,10 +26,10 @@ export default defineComponent({
           text: '투두앱',
           path: '/todoapp',
         },
-        // {
-        //   text: '가위 바위 보',
-        //   path: '/rps-game',
-        // },
+        {
+          text: '롤 챔피언 맞추기',
+          path: '/lol-matching',
+        },
         // {
         //   text: '로또 추첨',
         //   path: '/lotto',
