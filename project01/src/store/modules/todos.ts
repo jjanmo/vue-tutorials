@@ -38,15 +38,13 @@ const getters = {
     return (getters.filteredTodos as Todo[]).filter((todo) => !todo.done)
       .length;
   },
-  filteredTodos: (state: TodosState, _: unknown, rootState: RootState) => {
+  filteredTodos: (state: TodosState, _: any, rootState: RootState) => {
     const filterType = rootState.filter.type;
     if (filterType === 'done') return state.data.filter((todo) => todo.done);
     if (filterType === 'todo') return state.data.filter((todo) => !todo.done);
     return state.data;
   },
 };
-
-// const actions = {}; // 비동기처리인 경우에 사용
 
 const todos = {
   namespaced: true,
