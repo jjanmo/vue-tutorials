@@ -1,3 +1,6 @@
+import { ActionContext } from 'vuex';
+import { RootState } from '..';
+
 export interface Champion {
   id: string;
   key: string;
@@ -25,7 +28,6 @@ export interface Champions {
   [key: string]: Champion;
 }
 export type ChampionId = keyof Champions;
-
 export interface ChampionsResponse {
   type: string;
   format: string;
@@ -41,24 +43,24 @@ const state: ChampionsState = {
   data: null,
 };
 const mutations = {
-  setChampions: (data: Champions) => {
+  setChampions: (state: ChampionsState, data: Champions) => {
     state.data = data;
   },
-  setChampionIds: (ids: ChampionId[]) => {
+  setChampionIds: (state: ChampionsState, ids: ChampionId[]) => {
     state.ids = ids;
   },
 };
 const actions = {
-  fetchChampions: async () => {
+  fetchChampions: async (context: ActionContext<ChampionsState, RootState>) => {
     const response = await fetch(
       `http://ddragon.leagueoflegends.com/cdn/13.21.1/data/ko_KR/champion.json`
     );
     const result: ChampionsResponse = await response.json();
     const data = result.data;
-    mutations.setChampions(data);
+    context.commit('setChampions', data);
 
     const ids = Object.keys(data);
-    mutations.setChampionIds(ids);
+    context.commit('setChampionIds', ids);
   },
 };
 const getters = {};

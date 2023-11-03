@@ -38,6 +38,7 @@ const getters = {
     return (getters.filteredTodos as Todo[]).filter((todo) => !todo.done)
       .length;
   },
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   filteredTodos: (state: TodosState, _: any, rootState: RootState) => {
     const filterType = rootState.filter.type;
     if (filterType === 'done') return state.data.filter((todo) => todo.done);
