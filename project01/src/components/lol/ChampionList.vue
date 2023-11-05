@@ -1,5 +1,5 @@
 <template>
-  <div v-if="Object.values(champions).length === 0">Loading...</div>
+  <!-- <div v-if="Object.values(champions).length === 0">Loading...</div>
   <div v-else class="board">
     <draggable class="row" :list="selectedChampions" itemKey="id">
       <template #item="{ element }">
@@ -9,11 +9,20 @@
 
     <draggable class="row" :list="shuffle(selectedChampions)" itemKey="id">
       <template #item="{ element }">
-        <div class="droppable">
+        <div>
           <img :src="element.image" alt="champion" />
         </div>
       </template>
     </draggable>
+  </div> -->
+  <div class="board">
+    <div id="drop-target" @dragover.prevent @drop="handleDrop">
+      <p>Artrox</p>
+    </div>
+    <div id="draggable-element" draggable="true" @dragstart="handleDragStart">
+      <p>드래그할 이미지</p>
+      <img src="https://ddragon.leagueoflegends.com/cdn/13.21.1/img/champion/Aatrox.png" />
+    </div>
   </div>
 </template>
 
@@ -34,7 +43,7 @@ const IMAGE_BASE_URL = `https://ddragon.leagueoflegends.com/cdn/13.21.1/img/cham
 
 export default defineComponent({
   components: {
-    draggable,
+    // draggable,
   },
 
   data() {
@@ -70,6 +79,30 @@ export default defineComponent({
       }
 
       return result;
+    },
+
+    handleDragStart(event: DragEvent) {
+      console.log(event.target);
+
+      // 드래그 시작 시 데이터 전달
+      event.dataTransfer?.setData('text/plain', '이미지 데이터');
+    },
+    handleDrop(event: DragEvent) {
+      event.preventDefault();
+
+      const source = event.srcElement;
+      const target = event.target;
+      console.log('>>>', source, target);
+
+      const data = event.dataTransfer?.getData('text/plain');
+      console.log('data', data);
+      if (data === '이미지 데이터') {
+        // 드롭한 위치에 이미지 삽입 또는 처리
+        const dropTarget = document.getElementById('drop-target');
+        const image = document.createElement('img');
+        image.src = '이미지 URL';
+        dropTarget?.appendChild(image);
+      }
     },
   },
 
@@ -107,6 +140,15 @@ export default defineComponent({
   margin: auto;
   display: flex;
   justify-content: space-between;
+}
+
+#drop-target {
+  width: 120px;
+  height: 120px;
+  border: 1px solid black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 .row {
   display: grid;
