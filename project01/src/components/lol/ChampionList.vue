@@ -16,12 +16,9 @@
     </draggable>
   </div> -->
   <div class="board">
-    <div id="drop-target" @dragover.prevent @drop="handleDrop">
-      <p>Artrox</p>
-    </div>
+    <div id="drop-target" @dragover.prevent @drop="handleDrop">Aatrox</div>
     <div id="draggable-element" draggable="true" @dragstart="handleDragStart">
-      <p>드래그할 이미지</p>
-      <img src="https://ddragon.leagueoflegends.com/cdn/13.21.1/img/champion/Aatrox.png" />
+      <img id="Aatrox" src="https://ddragon.leagueoflegends.com/cdn/13.21.1/img/champion/Aatrox.png" />
     </div>
   </div>
 </template>
@@ -29,7 +26,6 @@
 <script lang="ts">
 import { defineComponent } from 'vue';
 import { ChampionsResponse, Champion } from '@/store/champion.type';
-import draggable from 'vuedraggable';
 
 type ImageBaseUrl = 'https://ddragon.leagueoflegends.com/cdn/13.21.1/img/champion/';
 interface SelectedChampion {
@@ -42,10 +38,7 @@ const TOTAL = 10;
 const IMAGE_BASE_URL = `https://ddragon.leagueoflegends.com/cdn/13.21.1/img/champion/`;
 
 export default defineComponent({
-  components: {
-    // draggable,
-  },
-
+  components: {},
   data() {
     return {
       champions: {},
@@ -82,27 +75,34 @@ export default defineComponent({
     },
 
     handleDragStart(event: DragEvent) {
-      console.log(event.target);
+      const id = (event.target as HTMLImageElement).id;
 
       // 드래그 시작 시 데이터 전달
-      event.dataTransfer?.setData('text/plain', '이미지 데이터');
+      event.dataTransfer?.setData('text/plain', id);
+      // event.dataTransfer?.setDragImage(event.target as HTMLImageElement, 100, 100);
     },
     handleDrop(event: DragEvent) {
       event.preventDefault();
+      const target = event.target as HTMLDivElement;
+      const targetId = target.textContent;
+      const sourceId = event.dataTransfer?.getData('text') as string;
+      console.log({ targetId, sourceId });
 
-      const source = event.srcElement;
-      const target = event.target;
-      console.log('>>>', source, target);
-
-      const data = event.dataTransfer?.getData('text/plain');
-      console.log('data', data);
-      if (data === '이미지 데이터') {
-        // 드롭한 위치에 이미지 삽입 또는 처리
-        const dropTarget = document.getElementById('drop-target');
-        const image = document.createElement('img');
-        image.src = '이미지 URL';
-        dropTarget?.appendChild(image);
+      if (targetId === sourceId) {
+        console.log('aaa');
+        target.innerHTML = '';
+        target.appendChild(document.getElementById(sourceId) as HTMLImageElement);
       }
+
+      // const data = event.dataTransfer?.getData('text/plain');
+      // console.log('data', data);
+      // if (data === '이미지 데이터') {
+      //   // 드롭한 위치에 이미지 삽입 또는 처리
+      //   const dropTarget = document.getElementById('drop-target');
+      //   const image = document.createElement('img');
+      //   image.src = '이미지 URL';
+      //   dropTarget?.appendChild(image);
+      // }
     },
   },
 
