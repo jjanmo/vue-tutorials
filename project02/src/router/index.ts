@@ -26,6 +26,6 @@ const routes = [
 
 Vue.use(VueRouter);
 
-const router = new VueRouter({ routes, mode: 'history' });
+const router = new VueRouter({ routes, mode: 'history', linkExactActiveClass: 'active' });
 
 export default router;

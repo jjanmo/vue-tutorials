@@ -55,7 +55,6 @@ export default class extends Vue {
   align-items: center;
   justify-content: center;
   padding: 5px;
-  border: 1px solid #fff;
   .text {
     margin-left: 5px;
     font-size: 16px;
@@ -74,5 +73,9 @@ export default class extends Vue {
   content: '|';
   margin: 0 2px;
   font-size: 18px;
+}
+
+.active {
+  color: #fff;
 }
 </style>
