@@ -1,5 +1,7 @@
 <template>
-  <div>Hacker News</div>
+  <div>
+    <router-view></router-view>
+  </div>
 </template>
 
 <script lang="ts">
