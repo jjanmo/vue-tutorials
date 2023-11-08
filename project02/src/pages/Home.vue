@@ -1,18 +1,24 @@
 <template>
-  <ul class="news">
-    <li class="item" v-for="(item, index) of news" :key="item.id">
-      <div class="row main-row">
-        <span>{{ index + 1 }}. </span>
-        <a :href="item.url" target="_blank">{{ item.title }}</a>
-      </div>
-      <div class="row sub-row">
-        {{ `${item.points} points by` }}
-        <router-link to="#" class="user">{{ item.user }}</router-link>
-        {{ item.time_ago }} |
-        {{ `${item.comments_count} comments` }}
-      </div>
-    </li>
-  </ul>
+  <div>
+    <ul class="news">
+      <li class="item" v-for="(item, index) of news" :key="item.id">
+        <div class="row main-row">
+          <span>{{ index + 1 }}. </span>
+          <a :href="item.url" target="_blank">{{ item.title }}</a>
+        </div>
+        <div class="row sub-row">
+          {{ `${item.points} points by` }}
+          <router-link to="#" class="user">{{ item.user }}</router-link>
+          {{ item.time_ago }} |
+          {{ `${item.comments_count} comments` }}
+        </div>
+      </li>
+    </ul>
+
+    <div class="footer">
+      <button class="more-button">more</button>
+    </div>
+  </div>
 </template>
 
 <script lang="ts">
@@ -59,5 +65,18 @@ export default class Home extends Vue {
   .user:hover {
     text-decoration: underline;
   }
+}
+.footer {
+  margin-top: 25px;
+  display: flex;
+  justify-content: center;
+}
+.more-button {
+  all: unset;
+  padding: 5px 10px;
+  color: #636e72;
+  cursor: pointer;
+  border: 2px solid #636e72;
+  border-radius: 20px;
 }
 </style>
