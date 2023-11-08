@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <Header />
-    <main>
+    <main class="main">
       <slot></slot>
     </main>
   </div>
@@ -23,5 +23,8 @@ export default class Layout extends Vue {}
   min-height: calc(100vh - 20px);
   margin: 10px auto;
   background-color: #fff6e9;
+}
+.main {
+  padding: 10px 10px 20px;
 }
 </style>
