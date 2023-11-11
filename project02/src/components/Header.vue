@@ -20,27 +20,15 @@
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
 import Logo from '@/icons/Logo.vue';
-
-const LINKS = [
-  {
-    path: '/new',
-    name: 'new',
-  },
-  {
-    path: '/ask',
-    name: 'ask',
-  },
-  {
-    path: 'jobs',
-    name: 'jobs',
-  },
-];
+import { headerLinks } from '@/constants/links';
 
 @Component({
   components: { Logo },
 })
 export default class extends Vue {
-  links = LINKS;
+  get links() {
+    return headerLinks;
+  }
 }
 </script>
 
