@@ -8,7 +8,7 @@
         </div>
         <div class="row sub-row">
           {{ `${item.points} points by` }}
-          <router-link to="#" class="user">{{ item.user }}</router-link>
+          <router-link :to="`/user/${item.user}`" class="user">{{ item.user }}</router-link>
           {{ item.time_ago }} |
           {{ `${item.comments_count} comments` }}
         </div>

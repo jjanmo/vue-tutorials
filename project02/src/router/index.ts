@@ -1,9 +1,10 @@
+import Vue from 'vue';
+import VueRouter from 'vue-router';
 import Home from '@/pages/Home.vue';
 import New from '@/pages/New.vue';
 import Ask from '@/pages/Ask.vue';
 import Jobs from '@/pages/Jobs.vue';
-import Vue from 'vue';
-import VueRouter from 'vue-router';
+import User from '@/pages/User.vue';
 
 const routes = [
   {
@@ -21,6 +22,10 @@ const routes = [
   {
     path: '/jobs',
     component: Jobs,
+  },
+  {
+    path: `/user/:name`,
+    component: User,
   },
 ];
 
