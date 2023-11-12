@@ -1,4 +1,4 @@
-export interface NewsItem {
+export interface Item {
   id: number;
   title: string;
   points?: number | null;
@@ -10,3 +10,5 @@ export interface NewsItem {
   url?: string;
   domain?: string;
 }
+
+export type ListType = 'new' | 'newest' | 'ask' | 'jobs';

@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { Item } from '@/interface/list';
 
 const API = axios.create({
   baseURL: 'https://api.hnpwa.com/v0',
@@ -8,14 +9,14 @@ const API = axios.create({
 });
 
 export function getNews() {
-  return API.get(`/news/1.json`);
+  return API.get<Item[]>(`/news/1.json`);
 }
 export function getNewest() {
-  return API.get(`/newest/1.json`);
+  return API.get<Item[]>(`/newest/1.json`);
 }
 export function getAsk() {
-  return API.get(`/ask/1.json`);
+  return API.get<Item[]>(`/ask/1.json`);
 }
 export function getJobs() {
-  return API.get(`/jobs/1.json`);
+  return API.get<Item[]>(`/jobs/1.json`);
 }
