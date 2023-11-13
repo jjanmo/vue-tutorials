@@ -3,6 +3,7 @@
     "target": "esnext",
     "module": "esnext",
     "strict": true,
+    "allowJs": true,
     "jsx": "preserve",
     "moduleResolution": "node",
     "experimentalDecorators": true,
@@ -13,6 +14,7 @@
     "useDefineForClassFields": true,
     "strictPropertyInitialization": false,
     "sourceMap": true,
+    "importHelpers": true,
     "baseUrl": ".",
     "types": ["webpack-env"],
     "paths": {
