@@ -1,14 +1,15 @@
 import Vue from 'vue';
-import Vuex from 'vuex';
-import ListModule from './modules/list';
+import Vuex, { StoreOptions } from 'vuex';
+import { ListModule } from './modules/list';
+import { ListState } from '@/interface/list';
 
 Vue.use(Vuex);
 
-export type RootState = {
-  listModule: ListModule;
-};
+export interface RootState {
+  list: ListState;
+}
 
-const storeOption = {
+const storeOption: StoreOptions<RootState> = {
   modules: {
     listModule: ListModule,
   },
@@ -18,4 +19,5 @@ const storeOption = {
 const createStore = () => new Vuex.Store<RootState>(storeOption);
 const store = createStore();
 
+export * from './storeAccessor';
 export default store;

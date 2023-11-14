@@ -12,3 +12,10 @@ export interface Item {
 }
 
 export type ListType = 'new' | 'newest' | 'ask' | 'jobs';
+
+export interface ListState {
+  news: Item[]; // 핫한 뉴스들 순으로
+  newest: Item[]; // 새로운 뉴스 순으로
+  ask: Item[];
+  jobs: Item[];
+}
