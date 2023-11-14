@@ -11,11 +11,12 @@ export interface Item {
   domain?: string;
 }
 
-export type ListType = 'new' | 'newest' | 'ask' | 'jobs';
-
-export interface ListState {
-  news: Item[]; // 핫한 뉴스들 순으로
-  newest: Item[]; // 새로운 뉴스 순으로
-  ask: Item[];
-  jobs: Item[];
-}
+// TODO : 요거 사용하고 싶은데...
+export type ListType = 'news' | 'newest' | 'ask' | 'jobs';
+/**
+ * - news: Item[] // 핫한 뉴스들 순으로
+ * - newest: Item[] // 새로운 뉴스 순으로
+ * - ask: Item[]
+ * - jobs: Item[]
+ */
+export type ListState = Record<string, Item[]>;

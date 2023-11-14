@@ -27,28 +27,31 @@ export class ListModule extends VuexModule {
   }
 
   @Action({ rawError: true })
-  async fetchList(listType: ListType) {
-    switch (listType) {
-      case 'new': {
-        const data = await getNewest().then((res) => res.data);
-        this.setNews(data);
-        return;
-      }
-      case 'ask': {
-        const data = await getAsk().then((res) => res.data);
-        this.setAsk(data);
-        return;
-      }
-      case 'jobs': {
-        const data = await getJobs().then((res) => res.data);
-        this.setJobs(data);
-        return;
-      }
-      default: {
-        const data = await getNews().then((res) => res.data);
-        this.setNewest(data);
-        return;
-      }
-    }
+  async fetchList(listType?: string) {
+    const data = await getNews().then((res) => res.data);
+    this.setNews(data);
+    //   console.log('🤬', listType);
+    //   switch (listType) {
+    //     case 'news': {
+    //       const data = await getNewest().then((res) => res.data);
+    //       this.setNews(data);
+    //       return;
+    //     }
+    //     case 'ask': {
+    //       const data = await getAsk().then((res) => res.data);
+    //       this.setAsk(data);
+    //       return;
+    //     }
+    //     case 'jobs': {
+    //       const data = await getJobs().then((res) => res.data);
+    //       this.setJobs(data);
+    //       return;
+    //     }
+    //     default: {
+    //       const data = await getNews().then((res) => res.data);
+    //       this.setNewest(data);
+    //       return;
+    //     }
+    //   }
   }
 }

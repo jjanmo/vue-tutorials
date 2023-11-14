@@ -17,37 +17,24 @@
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
-import { Item, ListType } from '@/interface/list.js';
+import { Item, ListType, ListState } from '@/interface/list.js';
 import { getAsk, getJobs, getNewest, getNews } from '@/api';
+import { listModule } from '@/store';
 
 @Component
 export default class extends Vue {
-  list: Item[] = [];
+  // listType = '';
 
-  async mounted() {
-    const listType = this.$route.path.slice(1) as ListType;
-    switch (listType) {
-      case 'new': {
-        const data = await getNewest().then((res) => res.data);
-        this.list = data;
-        break;
-      }
-      case 'ask': {
-        const data = await getAsk().then((res) => res.data);
-        this.list = data;
-        break;
-      }
-      case 'jobs': {
-        const data = await getJobs().then((res) => res.data);
-        this.list = data;
-        break;
-      }
-      default: {
-        const data = await getNews().then((res) => res.data);
-        this.list = data;
-        break;
-      }
-    }
+  get list() {
+    console.log(listModule);
+    return listModule.news;
+  }
+
+  mounted() {
+    // const listType = this.$route.path.slice(1) as ListType;
+    // this.listType = listType || 'news';
+    listModule.fetchList();
+    // this.$store.dispatch('list/fetchList');
   }
 }
 </script>

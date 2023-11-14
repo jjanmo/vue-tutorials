@@ -9,9 +9,12 @@ export interface RootState {
   list: ListState;
 }
 
+/**
+ * 모듈의 키값 === 모듈의 name
+ */
 const storeOption: StoreOptions<RootState> = {
   modules: {
-    listModule: ListModule,
+    list: ListModule,
   },
   strict: process.env.NODE_ENV !== 'production',
 };
