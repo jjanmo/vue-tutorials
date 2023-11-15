@@ -1,6 +1,6 @@
 <template>
-  <ul class="list">
-    <li class="item" v-for="(item, index) of list" :key="item.id">
+  <ul class="list" v-if="listType">
+    <li class="item" v-for="(item, index) of list[listType]" :key="item.id">
       <div class="row main-row">
         <span>{{ index + 1 }}. </span>
         <a :href="item.url" target="_blank">{{ item.title }}</a>
@@ -17,24 +17,28 @@
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
-import { Item, ListType, ListState } from '@/interface/list.js';
-import { getAsk, getJobs, getNewest, getNews } from '@/api';
 import { listModule } from '@/store';
+import { ListType } from '@/interface/list';
 
 @Component
 export default class extends Vue {
-  // listType = '';
-
   get list() {
-    console.log(listModule);
-    return listModule.news;
+    return {
+      news: listModule.news,
+      newest: listModule.newest,
+      ask: listModule.ask,
+      jobs: listModule.jobs,
+    };
+  }
+  get listType() {
+    return listModule.listType;
   }
 
-  mounted() {
-    // const listType = this.$route.path.slice(1) as ListType;
-    // this.listType = listType || 'news';
+  created() {
+    const _listType = this.$route.path.slice(1);
+    const arg = _listType ? (_listType === 'new' ? 'newest' : _listType) : 'news';
+    listModule.setListType(arg as ListType);
     listModule.fetchList();
-    // this.$store.dispatch('list/fetchList');
   }
 }
 </script>
