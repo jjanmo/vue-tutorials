@@ -11,7 +11,6 @@ export interface Item {
   domain?: string;
 }
 
-// TODO : 요거 사용하고 싶은데...
 export type ListType = 'news' | 'newest' | 'ask' | 'jobs';
 /**
  * - news: Item[] // 핫한 뉴스들 순으로
@@ -19,4 +18,10 @@ export type ListType = 'news' | 'newest' | 'ask' | 'jobs';
  * - ask: Item[]
  * - jobs: Item[]
  */
-export type ListState = Record<string, Item[]>;
+// export interface ListState {
+//   news: Item[];
+//   newest: Item[];
+//   ask: Item[];
+//   jobs: Item[];
+//   listType: ListType | null;
+// }
