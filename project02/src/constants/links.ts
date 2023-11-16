@@ -3,6 +3,10 @@
  */
 export const headerLinks = [
   {
+    path: '/top',
+    name: 'top',
+  },
+  {
     path: '/new',
     name: 'new',
   },
@@ -11,7 +15,7 @@ export const headerLinks = [
     name: 'ask',
   },
   {
-    path: 'jobs',
+    path: '/jobs',
     name: 'jobs',
   },
 ];

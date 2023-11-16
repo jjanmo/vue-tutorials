@@ -1,19 +1,18 @@
 <template>
   <header class="header">
-    <router-link to="/">
-      <div class="logo">
+    <div class="nav">
+      <div class="logo-container">
         <Logo />
-        <span class="text">Vue Hacker News</span>
       </div>
-    </router-link>
-
-    <ul class="links">
-      <li class="link" v-for="link of links" :key="link.name">
-        <router-link :to="link.path">
-          {{ link.name }}
-        </router-link>
-      </li>
-    </ul>
+      <ul class="links">
+        <li class="link" v-for="link of links" :key="link.name">
+          <router-link :to="link.path">
+            {{ link.name }}
+          </router-link>
+        </li>
+      </ul>
+    </div>
+    <div class="title">Hacker News Built with Vue</div>
   </header>
 </template>
 
@@ -35,35 +34,42 @@ export default class extends Vue {
 <style scoped lang="scss">
 .header {
   display: flex;
-  padding: 4px;
+  justify-content: space-between;
+  padding: 10px;
   background-color: #00c7ae;
 }
-.logo {
+.nav {
+  display: flex;
+  align-items: center;
+}
+.logo-container {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 5px;
-  .text {
-    margin-left: 5px;
-    font-size: 16px;
-    font-weight: 700;
-  }
 }
 .links {
   display: flex;
   align-items: center;
-  margin-left: 10px;
+  margin-left: 20px;
 }
-.link + .link {
-  margin-left: 5px;
-}
-.link + .link::before {
-  content: '|';
-  margin: 0 2px;
+.link {
+  padding: 0 10px;
+  text-transform: capitalize;
   font-size: 18px;
-}
-
-.active {
   color: #fff;
+  & a {
+    padding-bottom: 2px;
+  }
+}
+.title {
+  display: flex;
+  align-items: center;
+  margin-left: 5px;
+  font-size: 18px;
+  font-weight: 700;
+  color: #fff;
+}
+.active {
+  border-bottom: 1px solid #fff;
 }
 </style>
