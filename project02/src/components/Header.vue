@@ -1,18 +1,20 @@
 <template>
   <header class="header">
-    <div class="nav">
-      <div class="logo-container">
-        <Logo />
+    <div class="nav-container">
+      <div class="nav">
+        <div class="logo-container">
+          <Logo />
+        </div>
+        <ul class="links">
+          <li class="link" v-for="link of links" :key="link.name">
+            <router-link :to="link.path">
+              {{ link.name }}
+            </router-link>
+          </li>
+        </ul>
       </div>
-      <ul class="links">
-        <li class="link" v-for="link of links" :key="link.name">
-          <router-link :to="link.path">
-            {{ link.name }}
-          </router-link>
-        </li>
-      </ul>
+      <div class="title">Hacker News Built with Vue</div>
     </div>
-    <div class="title">Hacker News Built with Vue</div>
   </header>
 </template>
 
@@ -20,9 +22,10 @@
 import { Component, Vue } from 'vue-property-decorator';
 import Logo from '@/icons/Logo.vue';
 import { headerLinks } from '@/constants/links';
+import MoreButton from './MoreButton.vue';
 
 @Component({
-  components: { Logo },
+  components: { Logo, MoreButton },
 })
 export default class extends Vue {
   get links() {
@@ -34,13 +37,17 @@ export default class extends Vue {
 <style scoped lang="scss">
 .header {
   display: flex;
-  justify-content: space-between;
-  padding: 10px;
+  height: 60px;
   background-color: #00c7ae;
+}
+.nav-container {
+  min-width: 60%;
+  margin: auto;
+  display: flex;
+  justify-content: space-between;
 }
 .nav {
   display: flex;
-  align-items: center;
 }
 .logo-container {
   display: flex;
@@ -58,7 +65,7 @@ export default class extends Vue {
   font-size: 18px;
   color: #fff;
   & a {
-    padding-bottom: 2px;
+    padding-bottom: 3px;
   }
 }
 .title {
@@ -70,6 +77,6 @@ export default class extends Vue {
   color: #fff;
 }
 .active {
-  border-bottom: 1px solid #fff;
+  border-bottom: 2px solid #fff;
 }
 </style>

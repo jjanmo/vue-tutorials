@@ -1,10 +1,6 @@
 <template>
   <div>
     <List />
-
-    <div class="footer">
-      <button class="more-button">more</button>
-    </div>
   </div>
 </template>
 

@@ -1,6 +1,7 @@
 <template>
-  <div class="container">
+  <div class="layout-container">
     <Header />
+    <MoreButton />
     <main class="main">
       <slot></slot>
     </main>
@@ -10,21 +11,23 @@
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
 import Header from '@/components/Header.vue';
+import MoreButton from './MoreButton.vue';
 
 @Component({
-  components: { Header },
+  components: { Header, MoreButton },
 })
 export default class Layout extends Vue {}
 </script>
 
 <style scoped>
-.container {
-  width: 85%;
-  min-height: calc(100vh - 20px);
-  margin: 10px auto;
-  background-color: #fff6e9;
+.layout-container {
+  width: 100%;
+  min-height: 100vh;
+  background-color: #f2f3f6;
 }
 .main {
+  max-width: 60%;
   padding: 10px 10px 20px;
+  margin: auto;
 }
 </style>
