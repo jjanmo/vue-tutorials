@@ -1,6 +1,8 @@
 <template>
   <Layout>
-    <router-view></router-view>
+    <transition name="view">
+      <router-view></router-view>
+    </transition>
   </Layout>
 </template>
 
@@ -14,4 +16,13 @@ import Layout from '@/components/Layout.vue';
 export default class App extends Vue {}
 </script>
 
-<style lang="scss"></style>
+<style lang="scss" scoped>
+.view-enter-active,
+.view-leave-active {
+  transition: opacity 0.3s ease-out;
+}
+.view-enter,
+.view-leave-to {
+  opacity: 0;
+}
+</style>
