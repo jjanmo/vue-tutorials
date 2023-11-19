@@ -1,62 +1,31 @@
 import { VuexModule, Module, Action, Mutation } from 'vuex-module-decorators';
 import { Item, ListType } from '@/interface/list';
-import { getAsk, getJobs, getNewest, getNews } from '@/api';
+import { getList } from '@/api';
 
 @Module({ name: 'list', namespaced: true, stateFactory: true })
 export class ListModule extends VuexModule {
-  news: Item[] = [];
-  newest: Item[] = [];
-  ask: Item[] = [];
-  jobs: Item[] = [];
   listType: ListType | null = null;
+  list: {
+    top: Item[];
+    new: Item[];
+    ask: Item[];
+    jobs: Item[];
+  };
 
-  @Mutation
-  setNews(data: Item[]) {
-    this.news = data;
-  }
-  @Mutation
-  setNewest(data: Item[]) {
-    this.newest = data;
-  }
-  @Mutation
-  setAsk(data: Item[]) {
-    this.ask = data;
-  }
-  @Mutation
-  setJobs(data: Item[]) {
-    this.jobs = data;
-  }
   @Mutation
   setListType(type: ListType) {
     this.listType = type;
   }
+  @Mutation
+  setList(data: Item[]) {
+    if (this.listType) this.list[this.listType] = data;
+  }
 
   @Action({ rawError: true })
   async fetchList() {
-    switch (this.listType) {
-      case 'news': {
-        const data = await getNews().then((res) => res.data);
-        this.setNews(data);
-        return;
-      }
-      case 'newest': {
-        const data = await getNewest().then((res) => res.data);
-        this.setNewest(data);
-        return;
-      }
-      case 'ask': {
-        const data = await getAsk().then((res) => res.data);
-        this.setAsk(data);
-        return;
-      }
-      case 'jobs': {
-        const data = await getJobs().then((res) => res.data);
-        this.setJobs(data);
-        return;
-      }
-      default: {
-        return;
-      }
+    if (this.listType) {
+      const data = await getList(this.listType).then((res) => res.data);
+      this.setList(data);
     }
   }
 }

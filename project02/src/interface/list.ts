@@ -11,17 +11,8 @@ export interface Item {
   domain?: string;
 }
 
-export type ListType = 'news' | 'newest' | 'ask' | 'jobs';
-/**
- * - news: Item[] // 핫한 뉴스들 순으로
- * - newest: Item[] // 새로운 뉴스 순으로
- * - ask: Item[]
- * - jobs: Item[]
- */
-// export interface ListState {
-//   news: Item[];
-//   newest: Item[];
-//   ask: Item[];
-//   jobs: Item[];
-//   listType: ListType | null;
-// }
+export type ListType = 'top' | 'new' | 'ask' | 'jobs';
+export interface ListState {
+  listType: ListType | null;
+  list: Record<ListType, Item[]>;
+}
