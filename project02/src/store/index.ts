@@ -1,11 +1,12 @@
 import Vue from 'vue';
 import Vuex, { StoreOptions } from 'vuex';
 import { ListModule } from './modules/list';
+import { ListState } from '@/interface/list';
 
 Vue.use(Vuex);
 
 export interface RootState {
-  list: ListModule;
+  list: ListState;
 }
 
 /* 모듈의 키값 === 모듈의 name */

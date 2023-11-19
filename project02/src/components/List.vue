@@ -1,49 +1,32 @@
 <template>
-  <ul class="list" v-if="listType">
-    <li class="item" v-for="(item, index) of list[listType]" :key="item.id">
-      <div class="row main-row">
-        <span>{{ index + 1 }}. </span>
-        <a :href="item.url" target="_blank">{{ item.title }}</a>
-      </div>
-      <div class="row sub-row">
-        {{ `${item.points} points by` }}
-        <router-link :to="`/user/${item.user}`" class="user">{{ item.user }}</router-link>
-        {{ item.time_ago }} |
-        {{ `${item.comments_count} comments` }}
-      </div>
-    </li>
-  </ul>
+  <div>
+    <ul class="list" v-if="list.length">
+      <li class="item" v-for="(item, index) of list" :key="item.id">
+        <div class="row main-row">
+          <span>{{ index + 1 }}. </span>
+          <a :href="item.url" target="_blank">{{ item.title }}</a>
+        </div>
+        <div class="row sub-row">
+          {{ `${item.points} points by` }}
+          <router-link :to="`/user/${item.user}`" class="user">{{ item.user }}</router-link>
+          {{ item.time_ago }} |
+          {{ `${item.comments_count} comments` }}
+        </div>
+      </li>
+    </ul>
+  </div>
 </template>
 
 <script lang="ts">
-import { Component, Vue } from 'vue-property-decorator';
-import { listModule } from '@/store';
-import { ListType } from '@/interface/list';
+import { Component } from 'vue-property-decorator';
+import { ListMixin } from '@/mixins/ListMixin';
+import { mixins } from 'vue-class-component';
 
 @Component
-export default class extends Vue {
-  get list() {
-    return {
-      news: listModule.news,
-      newest: listModule.newest,
-      ask: listModule.ask,
-      jobs: listModule.jobs,
-    };
-  }
-  get listType() {
-    return listModule.listType;
-  }
-
-  created() {
-    const _listType = this.$route.path.slice(1);
-    const arg = _listType ? (_listType === 'new' ? 'newest' : _listType) : 'news';
-    listModule.setListType(arg as ListType);
-    listModule.fetchList();
-  }
-}
+export default class List extends mixins(ListMixin) {}
 </script>
 
-<style scoped lang="scss">
+<style lang="scss" scoped>
 .item {
   display: flex;
   flex-direction: column;

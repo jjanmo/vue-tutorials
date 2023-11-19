@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { Item } from '@/interface/list';
+import { Item, ListType } from '@/interface/list';
 
 const API = axios.create({
   baseURL: 'https://api.hnpwa.com/v0',
@@ -8,15 +8,13 @@ const API = axios.create({
   },
 });
 
-export function getNews() {
-  return API.get<Item[]>(`/news/1.json`);
-}
-export function getNewest() {
-  return API.get<Item[]>(`/newest/1.json`);
-}
-export function getAsk() {
-  return API.get<Item[]>(`/ask/1.json`);
-}
-export function getJobs() {
-  return API.get<Item[]>(`/jobs/1.json`);
+const listTypeMap = {
+  top: 'news',
+  new: 'newest',
+  ask: 'ask',
+  jobs: 'jobs',
+};
+
+export function getList(listType: ListType) {
+  return API.get<Item[]>(`/${listTypeMap[listType]}/1.json`);
 }

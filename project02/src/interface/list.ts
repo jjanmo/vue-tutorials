@@ -13,6 +13,5 @@ export interface Item {
 
 export type ListType = 'top' | 'new' | 'ask' | 'jobs';
 export interface ListState {
-  listType: ListType | null;
-  list: Record<ListType, Item[]>;
+  list: Item[];
 }
