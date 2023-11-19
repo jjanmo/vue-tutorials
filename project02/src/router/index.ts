@@ -1,27 +1,28 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
-import Home from '@/pages/Home.vue';
-import New from '@/pages/New.vue';
-import Ask from '@/pages/Ask.vue';
-import Jobs from '@/pages/Jobs.vue';
+import ListView from '@/pages/ListView.vue';
 import User from '@/pages/User.vue';
 
 const routes = [
   {
     path: '/',
-    component: Home,
+    redirect: '/top',
+  },
+  {
+    path: '/top',
+    component: ListView,
   },
   {
     path: '/new',
-    component: New,
+    component: ListView,
   },
   {
     path: '/ask',
-    component: Ask,
+    component: ListView,
   },
   {
     path: '/jobs',
-    component: Jobs,
+    component: ListView,
   },
   {
     path: `/user/:name`,
