@@ -4,28 +4,15 @@ import { getList } from '@/api';
 
 @Module({ name: 'list', namespaced: true, stateFactory: true })
 export class ListModule extends VuexModule {
-  listType: ListType | null = null;
-  list: {
-    top: Item[];
-    new: Item[];
-    ask: Item[];
-    jobs: Item[];
-  };
-
-  @Mutation
-  setListType(type: ListType) {
-    this.listType = type;
-  }
+  list: Item[] = [];
   @Mutation
   setList(data: Item[]) {
-    if (this.listType) this.list[this.listType] = data;
+    this.list = data;
   }
 
   @Action({ rawError: true })
-  async fetchList() {
-    if (this.listType) {
-      const data = await getList(this.listType).then((res) => res.data);
-      this.setList(data);
-    }
+  async fetchList(listType: ListType) {
+    const data = await getList(listType).then((res) => res.data);
+    this.setList(data);
   }
 }
