@@ -11,7 +11,7 @@ import List from '@/components/List.vue';
 @Component({
   components: { List },
 })
-export default class New extends Vue {}
+export default class Jobs extends Vue {}
 </script>
 
-<style scoped></style>
+<style scoped lang="scss"></style>

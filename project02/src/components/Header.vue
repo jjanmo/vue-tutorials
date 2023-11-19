@@ -27,7 +27,7 @@ import MoreButton from './MoreButton.vue';
 @Component({
   components: { Logo, MoreButton },
 })
-export default class extends Vue {
+export default class Header extends Vue {
   get links() {
     return headerLinks;
   }

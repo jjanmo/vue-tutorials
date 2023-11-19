@@ -1,7 +1,10 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
-import ListView from '@/pages/ListView.vue';
+import Home from '@/pages/Home.vue';
 import User from '@/pages/User.vue';
+import New from '@/pages/New.vue';
+import Ask from '@/pages/Ask.vue';
+import Jobs from '@/pages/Jobs.vue';
 
 const routes = [
   {
@@ -10,19 +13,19 @@ const routes = [
   },
   {
     path: '/top',
-    component: ListView,
+    component: Home,
   },
   {
     path: '/new',
-    component: ListView,
+    component: New,
   },
   {
     path: '/ask',
-    component: ListView,
+    component: Ask,
   },
   {
     path: '/jobs',
-    component: ListView,
+    component: Jobs,
   },
   {
     path: `/user/:name`,

@@ -5,7 +5,8 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue } from 'vue-property-decorator';
+import Vue from 'vue';
+import { Component } from 'vue-property-decorator';
 import List from '@/components/List.vue';
 
 @Component({
@@ -14,18 +15,4 @@ import List from '@/components/List.vue';
 export default class Home extends Vue {}
 </script>
 
-<style scoped lang="scss">
-.footer {
-  margin-top: 25px;
-  display: flex;
-  justify-content: center;
-}
-.more-button {
-  all: unset;
-  padding: 5px 10px;
-  color: #636e72;
-  cursor: pointer;
-  border: 2px solid #636e72;
-  border-radius: 20px;
-}
-</style>
+<style scoped lang="scss"></style>

@@ -14,4 +14,4 @@ import List from '@/components/List.vue';
 export default class New extends Vue {}
 </script>
 
-<style scoped></style>
+<style scoped lang="scss"></style>
