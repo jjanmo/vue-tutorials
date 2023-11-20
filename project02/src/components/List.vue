@@ -2,12 +2,15 @@
   <div>
     <ul class="list" v-if="list.length">
       <li class="item" v-for="item of list" :key="item.id">
-        <div class="point">{{ item.points }}</div>
-        <div class="content">
+        <div class="point" v-show="!isJobsItem">{{ item.points }}</div>
+        <div class="content" :class="{ job: isJobsItem }">
           <a class="main" :href="item.url" target="_blank">{{ item.title }}</a>
           <div class="sub">
-            by <router-link class="user" :to="`/user/${item.user}`">{{ item.user }}</router-link>
-            {{ item.time_ago }} hours ago | {{ `${item.comments_count} comments` }}
+            <span v-show="!isJobsItem">
+              by <router-link class="user" :to="`/user/${item.user}`">{{ item.user }}</router-link>
+            </span>
+            {{ item.time_ago }} hours ago
+            <span v-show="!isJobsItem"> | {{ `${item.comments_count} comments` }} </span>
           </div>
         </div>
       </li>
@@ -21,7 +24,11 @@ import { ListMixin } from '@/mixins/ListMixin';
 import { mixins } from 'vue-class-component';
 
 @Component
-export default class List extends mixins(ListMixin) {}
+export default class List extends mixins(ListMixin) {
+  get isJobsItem() {
+    return this.$route.path.includes('jobs');
+  }
+}
 </script>
 
 <style lang="scss" scoped>
@@ -46,6 +53,9 @@ export default class List extends mixins(ListMixin) {}
     color: #00c7ae;
   }
   .content {
+    &.job {
+      padding: 0 50px;
+    }
     .main {
       display: inline-block;
       margin-bottom: 5px;
