@@ -41,7 +41,7 @@ export default class Header extends Vue {
   background-color: #00c7ae;
 }
 .nav-container {
-  min-width: 60%;
+  min-width: 55%;
   margin: auto;
   display: flex;
   justify-content: space-between;

@@ -22,12 +22,9 @@ export default class Layout extends Vue {}
 <style scoped>
 .layout-container {
   width: 100%;
-  min-height: 100vh;
-  background-color: #f2f3f6;
 }
 .main {
-  max-width: 60%;
-  padding: 10px 10px 20px;
+  max-width: 55%;
   margin: auto;
 }
 </style>

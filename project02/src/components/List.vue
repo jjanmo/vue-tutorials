@@ -1,16 +1,14 @@
 <template>
   <div>
     <ul class="list" v-if="list.length">
-      <li class="item" v-for="(item, index) of list" :key="item.id">
-        <div class="row main-row">
-          <span>{{ index + 1 }}. </span>
-          <a :href="item.url" target="_blank">{{ item.title }}</a>
-        </div>
-        <div class="row sub-row">
-          {{ `${item.points} points by` }}
-          <router-link :to="`/user/${item.user}`" class="user">{{ item.user }}</router-link>
-          {{ item.time_ago }} |
-          {{ `${item.comments_count} comments` }}
+      <li class="item" v-for="item of list" :key="item.id">
+        <div class="point">{{ item.points }}</div>
+        <div class="content">
+          <a class="main" :href="item.url" target="_blank">{{ item.title }}</a>
+          <div class="sub">
+            by <router-link class="user" :to="`/user/${item.user}`">{{ item.user }}</router-link>
+            {{ item.time_ago }} hours ago | {{ `${item.comments_count} comments` }}
+          </div>
         </div>
       </li>
     </ul>
@@ -27,28 +25,38 @@ export default class List extends mixins(ListMixin) {}
 </script>
 
 <style lang="scss" scoped>
+.list {
+  background-color: white;
+  margin: 20px 0;
+}
 .item {
   display: flex;
-  flex-direction: column;
+  padding: 24px 0;
   font-size: 18px;
   & + & {
-    margin-top: 10px;
+    border-top: 1px solid #f2f3f6;
   }
-}
-.main-row {
-  color: #2d3436;
-  :first-child {
-    width: 20px;
+  .point {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100px;
+    font-size: 20px;
+    font-weight: 600;
+    color: #00c7ae;
   }
-}
-.sub-row {
-  padding-left: 20px;
-  margin-top: 5px;
-  font-size: 14px;
-  color: #828282;
-
-  .user:hover {
-    text-decoration: underline;
+  .content {
+    .main {
+      display: inline-block;
+      margin-bottom: 5px;
+    }
+    .sub {
+      font-size: 16px;
+      color: #828282;
+    }
+    .user {
+      text-decoration: underline;
+    }
   }
 }
 </style>
