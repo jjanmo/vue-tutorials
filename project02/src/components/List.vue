@@ -1,8 +1,11 @@
 <template>
-  <div>
+  <div v-if="isLoading" class="spinner-container">
+    <Spinner size="100" />
+  </div>
+  <div v-else>
     <ul class="list" v-if="list.length">
       <li class="item" v-for="item of list" :key="item.id">
-        <div class="point" v-show="!isJobsItem">{{ item.points }}</div>
+        <div class="point" v-show="!isJobsItem">{{ item.points ?? 0 }}</div>
         <div class="content" :class="{ job: isJobsItem }">
           <a class="main" :href="item.url" target="_blank">{{ item.title }}</a>
           <div class="sub">
@@ -22,8 +25,11 @@
 import { Component } from 'vue-property-decorator';
 import { ListMixin } from '@/mixins/ListMixin';
 import { mixins } from 'vue-class-component';
+import Spinner from '@/icons/Spinner.vue';
 
-@Component
+@Component({
+  components: { Spinner },
+})
 export default class List extends mixins(ListMixin) {
   get isJobsItem() {
     return this.$route.path.includes('jobs');
@@ -32,6 +38,12 @@ export default class List extends mixins(ListMixin) {
 </script>
 
 <style lang="scss" scoped>
+.spinner-container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
 .list {
   background-color: white;
   margin: 20px 0;
@@ -47,12 +59,14 @@ export default class List extends mixins(ListMixin) {
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 100px;
+    width: 120px;
     font-size: 20px;
     font-weight: 600;
     color: #00c7ae;
+    flex-shrink: 0;
   }
   .content {
+    padding-right: 20px;
     &.job {
       padding: 0 50px;
     }
