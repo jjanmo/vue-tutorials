@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { Item, ListType } from '@/interface/list';
+import { DetailedItem, ListItem, ListType } from '@/interface/list';
 import { User } from '@/interface/user';
 
 const API = axios.create({
@@ -17,9 +17,13 @@ const listTypeMap = {
 };
 
 export function getList(listType: ListType) {
-  return API.get<Item[]>(`/${listTypeMap[listType]}/1.json`);
+  return API.get<ListItem[]>(`/${listTypeMap[listType]}/1.json`);
 }
 
 export function getUser(name: string) {
   return API.get<User>(`/user/${name}.json`);
+}
+
+export function getDetailedItem(id: string) {
+  return API.get<DetailedItem>(`/item/${id}.json`);
 }

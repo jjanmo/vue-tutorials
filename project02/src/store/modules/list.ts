@@ -1,12 +1,12 @@
 import { VuexModule, Module, Action, Mutation } from 'vuex-module-decorators';
-import { Item, ListType } from '@/interface/list';
+import { ListItem, ListType } from '@/interface/list';
 import { getList } from '@/api';
 
 @Module({ name: 'list', namespaced: true, stateFactory: true })
 export class ListModule extends VuexModule {
-  list: Item[] = [];
+  list: ListItem[] = [];
   @Mutation
-  setList(data: Item[]) {
+  setList(data: ListItem[]) {
     this.list = data;
   }
 

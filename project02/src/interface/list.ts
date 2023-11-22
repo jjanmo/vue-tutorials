@@ -1,4 +1,4 @@
-export interface Item {
+export interface ListItem {
   id: number;
   title: string;
   points?: number | null;
@@ -13,5 +13,23 @@ export interface Item {
 
 export type ListType = 'top' | 'new' | 'ask' | 'jobs';
 export interface ListState {
-  list: Item[];
+  list: ListItem[];
+}
+
+export interface DetailedItem {
+  id: number;
+  title: string;
+  points: number | null;
+  user: string | null;
+  time: number;
+  time_ago: string;
+  content: string;
+  deleted?: boolean;
+  dead?: boolean;
+  type: string;
+  url?: string;
+  domain?: string;
+  comments: DetailedItem[];
+  level: number;
+  comments_count: number;
 }
