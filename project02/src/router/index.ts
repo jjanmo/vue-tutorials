@@ -5,6 +5,7 @@ import User from '@/pages/User.vue';
 import New from '@/pages/New.vue';
 import Ask from '@/pages/Ask.vue';
 import Jobs from '@/pages/Jobs.vue';
+import Detail from '@/pages/Detail.vue';
 
 const routes = [
   {
@@ -30,6 +31,10 @@ const routes = [
   {
     path: `/user/:name`,
     component: User,
+  },
+  {
+    path: `/item`,
+    component: Detail,
   },
 ];
 
