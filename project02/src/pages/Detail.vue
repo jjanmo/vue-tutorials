@@ -1,5 +1,5 @@
 <template>
-  <div v-if="detailedItem" class="item-container">
+  <div v-if="!isLoading && detailedItem" class="item-container">
     <div class="title">{{ detailedItem.title }}</div>
     <div class="item-info">
       {{ detailedItem.points }} points by {{ detailedItem.user }} {{ detailedItem.time_ago }} |
@@ -7,14 +7,18 @@
     </div>
     <p class="content" v-html="detailedItem.content"></p>
   </div>
+  <Spinner v-else size="100" />
 </template>
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
 import { getDetailedItem } from '@/api';
 import { DetailedItem } from '@/interface/list';
+import Spinner from '@/icons/Spinner.vue';
 
-@Component
+@Component({
+  components: { Spinner },
+})
 export default class Detail extends Vue {
   detailedItem: DetailedItem | null = null;
   isLoading = false;

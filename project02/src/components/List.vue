@@ -1,8 +1,5 @@
 <template>
-  <div v-if="isLoading" class="spinner-container">
-    <Spinner size="100" />
-  </div>
-  <div v-else>
+  <div v-if="!isLoading">
     <ul class="list" v-if="list.length">
       <li class="item" v-for="item of list" :key="item.id">
         <div class="point" v-show="!isJobsItem">{{ item.points ?? 0 }}</div>
@@ -19,6 +16,7 @@
       </li>
     </ul>
   </div>
+  <Spinner v-else size="100" />
 </template>
 
 <script lang="ts">
@@ -38,12 +36,6 @@ export default class List extends mixins(ListMixin) {
 </script>
 
 <style lang="scss" scoped>
-.spinner-container {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-}
 .list {
   background-color: white;
   margin: 20px 0;
