@@ -25,14 +25,8 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue';
-import { ChampionsResponse, Champion } from '@/store/champion.type';
-
-type ImageBaseUrl = 'https://ddragon.leagueoflegends.com/cdn/13.21.1/img/champion/';
-interface SelectedChampion {
-  id: string;
-  name: string;
-  image: `${ImageBaseUrl}${string}`;
-}
+import { Champion, SelectedChampion } from '@/store/champion.type';
+import { fetchChampions } from '@/api';
 
 const TOTAL = 10;
 const IMAGE_BASE_URL = `https://ddragon.leagueoflegends.com/cdn/13.21.1/img/champion/`;
@@ -44,36 +38,11 @@ export default defineComponent({
       champions: {},
     };
   },
-  mounted() {
-    this.fetchChampions();
+  async mounted() {
+    const { data } = await fetchChampions();
+    this.champions = data;
   },
   methods: {
-    async fetchChampions() {
-      const response = await fetch(`http://ddragon.leagueoflegends.com/cdn/13.21.1/data/ko_KR/champion.json`);
-      const result: ChampionsResponse = await response.json();
-      this.champions = result.data;
-    },
-
-    // TODO 로직 최적화
-    shuffle(array: SelectedChampion[]) {
-      const result: SelectedChampion[] = [];
-
-      let index = 0;
-      while (result.length < TOTAL) {
-        const selectedIndex = Math.floor(Math.random() * TOTAL);
-
-        const isAlreadySelected = result.find((champion) => champion.id === array[selectedIndex].id); // 이미 뽑은것인가
-        const isSameIndex = index === selectedIndex; // 현재 뽑을려고 하는 자리와 같은 자리인가
-
-        if ((!isAlreadySelected && !isSameIndex) || (index === 9 && !isAlreadySelected)) {
-          result.push(array[selectedIndex]);
-          index++;
-        }
-      }
-
-      return result;
-    },
-
     handleDragStart(event: DragEvent) {
       const id = (event.target as HTMLImageElement).id;
 
