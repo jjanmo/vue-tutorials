@@ -30,3 +30,11 @@ export interface ChampionsResponse {
   version: string;
   data: Champions;
 }
+
+export type ChampionImageBaseUrl = 'https://ddragon.leagueoflegends.com/cdn/13.21.1/img/champion/';
+
+export interface SelectedChampion {
+  id: string;
+  name: string;
+  image: `${ChampionImageBaseUrl}${string}`; // TODO 타입을 template literal type으로 만들 필요가 있을까??
+}

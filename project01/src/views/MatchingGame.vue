@@ -6,10 +6,10 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue';
-import ChampionList from '@/components/lol/ChampionList.vue';
+import ChampionList from '@/components/matching/ChampionList.vue';
 
 export default defineComponent({
-  name: 'LOLMatching',
+  name: 'Matching',
   components: {
     ChampionList,
   },
