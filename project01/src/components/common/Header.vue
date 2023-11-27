@@ -27,21 +27,13 @@ export default defineComponent({
           path: '/todoapp',
         },
         {
-          text: '롤 챔피언 맞추기',
-          path: '/lol-matching',
+          text: '매칭 게임',
+          path: '/matching',
         },
-        // {
-        //   text: '로또 추첨',
-        //   path: '/lotto',
-        // },
-        // {
-        //   text: '틱택톡',
-        //   path: '/tictactoe',
-        // },
-        // {
-        //   text: '지뢰찾기',
-        //   path: '/minesweeper',
-        // },
+        {
+          text: '메모리 게임',
+          path: '/memory',
+        },
       ],
     };
   },
