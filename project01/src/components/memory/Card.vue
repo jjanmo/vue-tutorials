@@ -1,6 +1,6 @@
 <template>
   <li class="scene">
-    <div class="card" @click="handleCardClick">
+    <div class="card" @click="handleCardClick" :data-id="champion.id">
       <div class="face front" data-face="front" :style="backgroundImageStyle"></div>
       <div class="face back" data-face="back"></div>
     </div>
@@ -11,8 +11,10 @@
 import { PropType, defineComponent } from 'vue';
 import { championImageBaseUrl } from '@/constants/champion';
 import { Champion } from '@/store/champion.type';
+import memory from '@/store/modules/memory';
 
 export default defineComponent({
+  name: 'Card',
   props: {
     champion: {
       type: Object as PropType<Champion>,
@@ -28,12 +30,33 @@ export default defineComponent({
     handleCardClick(e: Event) {
       const face = (e.target as HTMLDivElement).dataset.face;
       if (face === 'back') {
-        const card = e.currentTarget as HTMLDivElement;
-        card.classList.add('is-flipped');
+        const curCard = e.currentTarget as HTMLDivElement;
+        const curId = curCard.dataset.id;
+        curCard.classList.add('is-flipped');
 
-        setTimeout(() => {
-          card.classList.remove('is-flipped');
-        }, 700);
+        const selected = memory.state.pair;
+
+        if (selected) {
+          const { target, id } = selected;
+          if (id === curId) {
+            this.$store.commit('memory/addTotalPair');
+          } else {
+            setTimeout(() => {
+              target.classList.remove('is-flipped');
+              curCard.classList.remove('is-flipped');
+            }, 700);
+          }
+          this.$store.commit('memory/resetPair');
+        } else {
+          this.$store.commit('memory/setPair', {
+            target: curCard,
+            id: curId,
+          });
+        }
+
+        // 체크로직 필요
+        // - 몇개 열렸는지
+        // - 2개 열렸을때 체크 후 닫아야함(열린 카드가 뭔지, 어떤 건지 알아야함) or
       }
     },
   },
