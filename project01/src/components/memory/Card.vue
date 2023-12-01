@@ -28,6 +28,8 @@ export default defineComponent({
   },
   methods: {
     handleCardClick(e: Event) {
+      if (!memory.state.isStarted) return;
+
       const face = (e.target as HTMLDivElement).dataset.face;
       if (face === 'back') {
         const curCard = e.currentTarget as HTMLDivElement;

@@ -6,11 +6,13 @@ export interface Pair {
 export interface MemoryState {
   pair: Pair | null;
   totalPairs: number;
+  isStarted: boolean;
 }
 
 const state: MemoryState = {
   pair: null,
   totalPairs: 0,
+  isStarted: false,
 };
 
 const mutations = {
@@ -21,12 +23,13 @@ const mutations = {
     state.totalPairs = 0;
   },
   setPair: (state: MemoryState, payload: Pair) => {
-    console.log('>>>', payload);
     state.pair = payload;
-    console.log('!!!!', state.pair);
   },
   resetPair: (state: MemoryState) => {
     state.pair = null;
+  },
+  setStarted(state: MemoryState) {
+    state.isStarted = !state.isStarted;
   },
 };
 
