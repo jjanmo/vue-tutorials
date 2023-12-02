@@ -8,9 +8,6 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue';
-import { fetchChampions } from '@/api';
-import { Champion } from '@/store/champion.type';
-import { select, shuffle } from '@/utils';
 import Card from '@/components/memory/Card.vue';
 
 export default defineComponent({
@@ -18,16 +15,15 @@ export default defineComponent({
   components: {
     Card,
   },
-  data() {
-    return {
-      champions: [] as Champion[],
-    };
+
+  computed: {
+    champions() {
+      return this.$store.state.memory.champions;
+    },
   },
 
-  async mounted() {
-    const { data } = await fetchChampions();
-    const _champions = select(Object.values(data.data), 8);
-    this.champions = [..._champions, ...shuffle(_champions)];
+  mounted() {
+    this.$store.dispatch('memory/getChampions');
   },
 });
 </script>

@@ -23,12 +23,19 @@ export default defineComponent({
   methods: {
     handleClick() {
       const isStarted = memory.state.isStarted;
-      if (isStarted) {
-        this.buttonText = 'Start';
-        // 모두 리셋
-      } else this.buttonText = 'Restart';
+      if (!isStarted) {
+        this.buttonText = 'Restart';
+        this.$store.commit('memory/startGame');
+        return;
+      }
 
-      this.$store.commit('memory/setStarted');
+      this.initializeStat();
+      this.$store.commit('memory/initializeGame');
+      this.$store.dispatch('memory/getChampions');
+    },
+    initializeStat() {
+      this.moves = 0;
+      this.time = 0;
     },
   },
 });

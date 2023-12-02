@@ -36,25 +36,26 @@ export default defineComponent({
         const curId = curCard.dataset.id;
         curCard.classList.add('is-flipped');
 
-        const selected = memory.state.pair;
-
+        const selected = memory.state.card;
         if (selected) {
           const { target, id } = selected;
           if (id === curId) {
-            this.$store.commit('memory/addTotalPair');
+            this.$store.commit('memory/addTotalCards', [selected, { target: curCard, id: curId }]);
           } else {
             setTimeout(() => {
               target.classList.remove('is-flipped');
               curCard.classList.remove('is-flipped');
             }, 700);
           }
-          this.$store.commit('memory/resetPair');
-        } else {
-          this.$store.commit('memory/setPair', {
-            target: curCard,
-            id: curId,
-          });
+          this.$store.commit('memory/resetCard');
+          return;
         }
+
+        const payload = {
+          target: curCard,
+          id: curId,
+        };
+        this.$store.commit('memory/setCard', payload);
 
         // 체크로직 필요
         // - 몇개 열렸는지
