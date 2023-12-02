@@ -13,11 +13,12 @@
 </template>
 
 <script lang="ts">
+import { TOTAL_CARDS } from '@/constants/champion';
 import { defineComponent } from 'vue';
 
 export default defineComponent({
   data() {
-    return { time: 0, buttonText: 'Start', timerId: -1 };
+    return { time: 0, buttonText: '시작하기', timerId: -1 };
   },
   computed: {
     moves() {
@@ -25,6 +26,9 @@ export default defineComponent({
     },
     isStarted() {
       return this.$store.state.memory.isStarted;
+    },
+    isEnd() {
+      return this.$store.state.memory.totalCards.length === TOTAL_CARDS;
     },
   },
 
@@ -38,7 +42,7 @@ export default defineComponent({
     handleClick() {
       if (!this.isStarted) {
         this.getTime();
-        this.buttonText = 'Restart';
+        this.buttonText = '다시 시작하기';
         this.$store.commit('memory/startGame');
         return;
       }
@@ -53,6 +57,14 @@ export default defineComponent({
       clearInterval(this.timerId);
       this.getTime();
     },
+  },
+  watch: {
+    isEnd() {
+      clearInterval(this.timerId);
+    },
+  },
+  unmounted() {
+    clearInterval(this.timerId);
   },
 });
 </script>
@@ -71,7 +83,7 @@ export default defineComponent({
   padding: 10px 20px;
 }
 .stat {
-  min-width: 180px;
+  min-width: 200px;
   display: flex;
   justify-content: space-between;
 }

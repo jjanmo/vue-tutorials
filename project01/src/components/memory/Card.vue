@@ -9,7 +9,7 @@
 
 <script lang="ts">
 import { PropType, defineComponent } from 'vue';
-import { CHAMPION_IMAGE_BASE_URL } from '@/constants/champion';
+import { CHAMPION_IMAGE_BASE_URL, TOTAL_CARDS } from '@/constants/champion';
 import { Champion } from '@/store/champion.type';
 import memory from '@/store/modules/memory';
 
@@ -27,6 +27,14 @@ export default defineComponent({
     },
   },
   methods: {
+    checkTotalCards() {
+      const totalCards = memory.state.totalCards;
+      if (totalCards.length === TOTAL_CARDS) {
+        setTimeout(() => {
+          this.$store.commit('modal/openModal');
+        }, 500);
+      }
+    },
     handleCardClick(e: Event) {
       if (!memory.state.isStarted) return;
 
@@ -43,6 +51,7 @@ export default defineComponent({
           const { target, id } = selected;
           if (id === curId) {
             this.$store.commit('memory/addCards', [selected, { target: curCard, id: curId }]);
+            this.checkTotalCards();
           } else {
             setTimeout(() => {
               target.classList.remove('is-flipped');
@@ -58,10 +67,6 @@ export default defineComponent({
           id: curId,
         };
         this.$store.commit('memory/setCard', payload);
-
-        // 체크로직 필요
-        // - 몇개 열렸는지
-        // - 2개 열렸을때 체크 후 닫아야함(열린 카드가 뭔지, 어떤 건지 알아야함) or
       }
     },
   },
@@ -114,5 +119,11 @@ export default defineComponent({
   justify-content: center;
   align-items: center;
   font-size: 50px;
+}
+.content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 </style>
