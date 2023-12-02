@@ -1,35 +1,40 @@
-export interface Pair {
+export interface Card {
   target: HTMLElement;
   id: string;
 }
 
 export interface MemoryState {
-  pair: Pair | null;
-  totalPairs: number;
+  card: Card | null;
+  totalCards: Card[];
+  flippedCount: number;
   isStarted: boolean;
 }
 
 const state: MemoryState = {
-  pair: null,
-  totalPairs: 0,
+  card: null,
+  totalCards: [],
+  flippedCount: 0,
   isStarted: false,
 };
 
 const mutations = {
-  addTotalPair: (state: MemoryState) => {
-    state.totalPairs++;
+  addTotalCards: (state: MemoryState, payload: Card[]) => {
+    state.totalCards.push(...payload);
   },
-  resetTotalPairs: (state: MemoryState) => {
-    state.totalPairs = 0;
+  setCard: (state: MemoryState, payload: Card) => {
+    state.card = payload;
   },
-  setPair: (state: MemoryState, payload: Pair) => {
-    state.pair = payload;
+  resetCard: (state: MemoryState) => {
+    state.card = null;
   },
-  resetPair: (state: MemoryState) => {
-    state.pair = null;
+  startGame(state: MemoryState) {
+    state.isStarted = true;
   },
-  setStarted(state: MemoryState) {
-    state.isStarted = !state.isStarted;
+  initializeGame(state: MemoryState) {
+    state.isStarted = false;
+    state.flippedCount = 0;
+    state.card = null;
+    state.totalCards = [];
   },
 };
 
