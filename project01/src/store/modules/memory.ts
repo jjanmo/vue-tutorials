@@ -30,8 +30,11 @@ const mutations = {
   setChampions: (state: MemoryState, payload: Champion[]) => {
     state.champions = payload;
   },
-  addTotalCards: (state: MemoryState, payload: Card[]) => {
+  addCards: (state: MemoryState, payload: Card[]) => {
     state.totalCards.push(...payload);
+  },
+  addFlippedCount: (state: MemoryState) => {
+    state.flippedCount++;
   },
   setCard: (state: MemoryState, payload: Card) => {
     state.card = payload;

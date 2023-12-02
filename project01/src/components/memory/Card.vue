@@ -36,11 +36,13 @@ export default defineComponent({
         const curId = curCard.dataset.id;
         curCard.classList.add('is-flipped');
 
+        this.$store.commit('memory/addFlippedCount');
+
         const selected = memory.state.card;
         if (selected) {
           const { target, id } = selected;
           if (id === curId) {
-            this.$store.commit('memory/addTotalCards', [selected, { target: curCard, id: curId }]);
+            this.$store.commit('memory/addCards', [selected, { target: curCard, id: curId }]);
           } else {
             setTimeout(() => {
               target.classList.remove('is-flipped');

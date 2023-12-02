@@ -2,11 +2,11 @@
   <div class="controller">
     <button class="button" @click="handleClick">{{ buttonText }}</button>
     <div class="stat">
-      <div class="moves">
-        Moves : <span>{{ moves }}</span>
+      <div>
+        Moves : <span class="value">{{ moves }}</span> 번
       </div>
-      <div class="time">
-        Time : <span>{{ time }}</span>
+      <div>
+        Time : <span class="value">{{ time }}</span> 초
       </div>
     </div>
   </div>
@@ -14,16 +14,30 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue';
-import memory from '@/store/modules/memory';
 
 export default defineComponent({
   data() {
-    return { moves: 0, time: 0, buttonText: 'Start' };
+    return { time: 0, buttonText: 'Start', timerId: -1 };
   },
+  computed: {
+    moves() {
+      return Math.floor(this.$store.state.memory.flippedCount / 2);
+    },
+    isStarted() {
+      return this.$store.state.memory.isStarted;
+    },
+  },
+
   methods: {
+    getTime() {
+      const id = setInterval(() => {
+        this.time++;
+      }, 1000);
+      this.timerId = id;
+    },
     handleClick() {
-      const isStarted = memory.state.isStarted;
-      if (!isStarted) {
+      if (!this.isStarted) {
+        this.getTime();
         this.buttonText = 'Restart';
         this.$store.commit('memory/startGame');
         return;
@@ -36,6 +50,8 @@ export default defineComponent({
     initializeStat() {
       this.moves = 0;
       this.time = 0;
+      clearInterval(this.timerId);
+      this.getTime();
     },
   },
 });
@@ -55,11 +71,12 @@ export default defineComponent({
   padding: 10px 20px;
 }
 .stat {
-  width: 160px;
+  min-width: 180px;
   display: flex;
   justify-content: space-between;
 }
-.moves,
-.time {
+
+.value {
+  font-weight: 600;
 }
 </style>
