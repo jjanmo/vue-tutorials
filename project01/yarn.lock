@@ -4907,6 +4907,11 @@ pkg-dir@^4.1.0:
   dependencies:
     find-up "^4.0.0"
 
+portal-vue@^3.0.0-beta.0:
+  version "3.0.0-beta.0"
+  resolved "https://registry.yarnpkg.com/portal-vue/-/portal-vue-3.0.0-beta.0.tgz#ada907776fdabad3f9ec609f7f00e5648480b533"
+  integrity sha512-ktV+Q0fwlsjeF+2xGebMxrN6xH8yMdmbLzYbd2OfcgU4OmzSmkj6iP3kBQRGa+7A5WZlqCHWaFfecNs9Igsv9w==
+
 portfinder@^1.0.26:
   version "1.0.32"
   resolved "https://registry.yarnpkg.com/portfinder/-/portfinder-1.0.32.tgz#2fe1b9e58389712429dc2bea5beb2146146c7f81"
