@@ -9,7 +9,7 @@
 
 <script lang="ts">
 import { PropType, defineComponent } from 'vue';
-import { championImageBaseUrl } from '@/constants/champion';
+import { CHAMPION_IMAGE_BASE_URL } from '@/constants/champion';
 import { Champion } from '@/store/champion.type';
 import memory from '@/store/modules/memory';
 
@@ -23,7 +23,7 @@ export default defineComponent({
   },
   computed: {
     backgroundImageStyle() {
-      return `background-image: url(${championImageBaseUrl}${this.champion.image.full})`;
+      return `background-image: url(${CHAMPION_IMAGE_BASE_URL}${this.champion.image.full})`;
     },
   },
   methods: {
