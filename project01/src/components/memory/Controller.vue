@@ -37,6 +37,7 @@ export default defineComponent({
 <style scoped>
 .controller {
   display: flex;
+  align-items: center;
   justify-content: space-between;
   padding: 10px 20px;
   margin: 10px 0;
@@ -47,12 +48,11 @@ export default defineComponent({
   padding: 10px 20px;
 }
 .stat {
+  width: 160px;
   display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
+  justify-content: space-between;
 }
 .moves,
 .time {
-  text-align: right;
 }
 </style>

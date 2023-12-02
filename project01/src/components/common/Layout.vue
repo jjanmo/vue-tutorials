@@ -22,7 +22,7 @@ export default {
 .content {
   max-width: 840px;
   height: 100%;
-  padding: 3rem 1rem;
+  padding: 1rem;
   margin: auto;
 }
 </style>
