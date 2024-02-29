@@ -1,8 +1,8 @@
 <template>
   <div class="gallery">
-    <a v-for="(image, i) of images" :key="i" :href="image" :data-src="image" class="image-frame">
+    <div v-for="(image, i) of images" :key="i" :data-src="image" class="image-frame">
       <img :src="image" :alt="`image-${i}`" />
-    </a>
+    </div>
   </div>
 </template>
 
@@ -50,6 +50,7 @@ export default defineComponent({
   grid-column: span 3;
   border-radius: 8px;
   overflow: hidden;
+  cursor: pointer;
 }
 .image-frame img {
   width: 100%;
