@@ -1,5 +1,5 @@
 <template>
-  <div class="gallery">
+  <div class="image-gallery">
     <div v-for="(image, i) of images" :key="i" :data-src="image" class="image-frame">
       <img :src="image" :alt="`image-${i}`" />
     </div>
@@ -11,6 +11,7 @@ import { defineComponent } from 'vue';
 import lightGallery from 'lightgallery';
 import lgThumbnail from 'lightgallery/plugins/thumbnail';
 import lgZoom from 'lightgallery/plugins/zoom';
+import hash from 'lightgallery/plugins/hash';
 
 export default defineComponent({
   name: 'Gallery',
@@ -25,9 +26,10 @@ export default defineComponent({
   }),
 
   mounted() {
-    lightGallery(document.querySelector('.gallery') as HTMLDivElement, {
+    lightGallery(document.querySelector('.image-gallery') as HTMLDivElement, {
       speed: 500,
-      plugins: [lgThumbnail, lgZoom],
+      plugins: [lgThumbnail, lgZoom, hash],
+      galleryId: 'image-gallery',
     });
   },
 });
@@ -38,7 +40,7 @@ export default defineComponent({
 @import 'lightgallery/css/lg-thumbnail.css';
 @import 'lightgallery/css/lg-zoom.css';
 
-.gallery {
+.image-gallery {
   width: 282px;
   display: grid;
   grid-template-columns: repeat(6, 1fr);
