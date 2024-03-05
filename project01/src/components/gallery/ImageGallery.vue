@@ -30,6 +30,7 @@ export default defineComponent({
       speed: 500,
       plugins: [lgThumbnail, lgZoom, hash],
       galleryId: 'image-gallery',
+      hash: true,
     });
   },
 });

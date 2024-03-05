@@ -65,7 +65,6 @@ export default defineComponent({
   computed: {
     videoThumbnails() {
       const videos = document.querySelectorAll('video');
-      console.log('@@', videos);
       return Array.from(videos).map((video) => {
         const canvas = document.createElement('canvas') as HTMLCanvasElement;
         const context = canvas.getContext('2d') as CanvasRenderingContext2D;
