@@ -1,6 +1,6 @@
 <template>
   <div class="controller">
-    <button class="button" @click="handleClick">{{ buttonText }}</button>
+    <button class="button" @click="handleStartClick">{{ buttonText }}</button>
     <div class="stat">
       <div>
         Moves : <span class="value">{{ moves }}</span> 번
@@ -18,9 +18,12 @@ import { defineComponent } from 'vue';
 
 export default defineComponent({
   data() {
-    return { time: 0, buttonText: '시작하기', timerId: -1 };
+    return { buttonText: '시작하기', timerId: -1 };
   },
   computed: {
+    time() {
+      return this.$store.state.memory.time;
+    },
     moves() {
       return Math.floor(this.$store.state.memory.flippedCount / 2);
     },
@@ -33,34 +36,27 @@ export default defineComponent({
   },
 
   methods: {
-    getTime() {
+    startTimer() {
+      console.log('startTimer');
+      if (this.timerId) clearInterval(this.timerId);
+
       const id = setInterval(() => {
-        this.time++;
+        this.$store.commit('memory/setTime', this.time + 1);
+        console.log('time', this.time);
       }, 1000);
       this.timerId = id;
     },
-    handleClick() {
-      if (!this.isStarted) {
-        this.getTime();
-        this.buttonText = '다시 시작하기';
-        this.$store.commit('memory/startGame');
-        return;
-      }
+    handleStartClick() {
+      if (!this.isStarted) this.buttonText = '다시 시작하기';
 
-      this.initializeStat();
-      this.$store.commit('memory/initializeGame');
+      this.$store.commit('memory/startGame');
       this.$store.dispatch('memory/getChampions');
-    },
-    initializeStat() {
-      this.moves = 0;
-      this.time = 0;
-      clearInterval(this.timerId);
-      this.getTime();
+      this.startTimer();
     },
   },
   watch: {
     isEnd() {
-      clearInterval(this.timerId);
+      if (this.isEnd) clearInterval(this.timerId);
     },
   },
   unmounted() {

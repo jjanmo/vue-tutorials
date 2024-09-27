@@ -8,7 +8,10 @@
   <portal v-if="showModal" to="modal-content">
     <div>
       <h1 class="title">축하합니다.🎉</h1>
-      <p class="detail">총 {{ moves }}번의 카드쌍을 뒤집었습니다.</p>
+      <div class="detail">
+        <div>뒤집은 카드(쌍) 횟수 : {{ moves }} 번</div>
+        <div>걸리 시간 : {{ time }} 초</div>
+      </div>
     </div>
     <button class="confirm-button" @click="handleCloseModal">확인</button>
   </portal>
@@ -33,6 +36,9 @@ export default defineComponent({
     },
     moves() {
       return Math.floor(this.$store.state.memory.flippedCount / 2);
+    },
+    time() {
+      return this.$store.state.memory.time;
     },
   },
   methods: {
