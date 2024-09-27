@@ -34,10 +34,6 @@ export default defineComponent({
           text: '메모리 게임',
           path: '/memory',
         },
-        {
-          text: '갤러리',
-          path: '/gallery',
-        },
       ],
     };
   },
