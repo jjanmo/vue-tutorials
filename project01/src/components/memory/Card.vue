@@ -36,7 +36,7 @@ export default defineComponent({
       }
     },
     handleCardClick(e: Event) {
-      if (!memory.state.isStarted) return;
+      if (!memory.state.isStarted || memory.state.totalCards.length >= TOTAL_CARDS) return;
 
       const face = (e.target as HTMLDivElement).dataset.face;
       if (face === 'back') {
