@@ -37,12 +37,10 @@ export default defineComponent({
 
   methods: {
     startTimer() {
-      console.log('startTimer');
       if (this.timerId) clearInterval(this.timerId);
 
       const id = setInterval(() => {
         this.$store.commit('memory/setTime', this.time + 1);
-        console.log('time', this.time);
       }, 1000);
       this.timerId = id;
     },
