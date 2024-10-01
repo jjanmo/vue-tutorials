@@ -27,7 +27,7 @@ export interface Champion {
 }
 
 export interface CommonState {
-  champions: Champion[] | null;
+  champions: { [key: string]: Champion } | null;
 }
 
 const state: CommonState = {
@@ -35,7 +35,7 @@ const state: CommonState = {
 };
 
 const mutations = {
-  setChampions: (state: CommonState, payload: Champion[]) => {
+  setChampions: (state: CommonState, payload: { [key: string]: Champion }) => {
     state.champions = payload;
   },
 };

@@ -13,14 +13,17 @@
 </template>
 
 <script lang="ts">
-import { TOTAL_CARDS } from '@/constants/champion';
 import { defineComponent } from 'vue';
+import { TOTAL_CARDS } from '@/constants/memory';
 
 export default defineComponent({
   data() {
     return { buttonText: '시작하기', timerId: -1 };
   },
   computed: {
+    allChampions() {
+      return this.$store.state.common.champions;
+    },
     time() {
       return this.$store.state.memory.time;
     },
@@ -47,8 +50,8 @@ export default defineComponent({
     handleStartClick() {
       if (!this.isStarted) this.buttonText = '다시 시작하기';
 
+      this.$store.commit('memory/setBoard', { champions: this.allChampions });
       this.$store.commit('memory/startGame');
-      this.$store.dispatch('memory/getChampions');
       this.startTimer();
     },
   },

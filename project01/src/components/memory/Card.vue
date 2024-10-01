@@ -9,9 +9,10 @@
 
 <script lang="ts">
 import { PropType, defineComponent } from 'vue';
-import { CHAMPION_IMAGE_BASE_URL, TOTAL_CARDS } from '@/constants/champion';
-import { Champion } from '@/store/champion.type';
+import { CHAMPION_IMAGE_BASE_URL } from '@/constants/champion';
 import memory from '@/store/modules/memory';
+import { Champion } from '@/store/modules/common';
+import { TOTAL_CARDS } from '@/constants/memory';
 
 export default defineComponent({
   name: 'Card',

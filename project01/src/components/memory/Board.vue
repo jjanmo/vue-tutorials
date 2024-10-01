@@ -1,7 +1,7 @@
 <template>
   <div class="board-container">
     <ul class="board">
-      <Card v-for="(champion, index) in champions" :key="index" :champion="champion" />
+      <Card v-for="(champion, index) in board" :key="index" :champion="champion" />
     </ul>
   </div>
 
@@ -28,8 +28,11 @@ export default defineComponent({
   },
 
   computed: {
-    champions() {
-      return this.$store.state.memory.champions;
+    board() {
+      return this.$store.state.memory.board;
+    },
+    allChampions() {
+      return this.$store.state.common.champions;
     },
     showModal() {
       return this.$store.state.modal.showModal;
@@ -46,8 +49,9 @@ export default defineComponent({
       this.$store.commit('modal/closeModal');
     },
   },
-  mounted() {
-    this.$store.dispatch('memory/getChampions');
+  async mounted() {
+    await this.$store.dispatch('common/getChampions');
+    this.$store.commit('memory/setBoard', { champions: this.allChampions });
   },
 });
 </script>
