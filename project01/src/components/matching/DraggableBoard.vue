@@ -1,47 +1,44 @@
 <template>
-  <!-- <div v-if="Object.values(champions).length === 0">Loading...</div>
-  <div v-else class="board">
-    <draggable class="row" :list="selectedChampions" itemKey="id">
-      <template #item="{ element }">
-        <div class="droppable">{{ element.name }}</div>
-      </template>
-    </draggable>
 
-    <draggable class="row" :list="shuffle(selectedChampions)" itemKey="id">
-      <template #item="{ element }">
-        <div>
-          <img :src="element.image" alt="champion" />
-        </div>
-      </template>
-    </draggable>
-  </div> -->
-  <div class="board">
+  
+
+  <ul>
+    <li v-for="champion in champions" :key="champion.id">
+      <img :src="`${CHAMPION_IMAGE_BASE_URL}${champion.id}.png`" :alt="`${champion.name}`" />
+    </li>
+  </ul>
+
+  <!-- <div class="board">
     <div id="drop-target" @dragover.prevent @drop="handleDrop">Aatrox</div>
     <div id="draggable-element" draggable="true" @dragstart="handleDragStart">
       <img id="Aatrox" src="https://ddragon.leagueoflegends.com/cdn/13.21.1/img/champion/Aatrox.png" />
     </div>
-  </div>
+  </div> -->
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue';
-import { Champion, SelectedChampion } from '@/store/champion.type';
-import { fetchChampions } from '@/api';
-
-const TOTAL = 10;
-const IMAGE_BASE_URL = `https://ddragon.leagueoflegends.com/cdn/13.21.1/img/champion/`;
+import { Champion } from '@/store/modules/common';
+import { shuffleAndSelect } from '@/utils';
+import { CHAMPION_IMAGE_BASE_URL } from '@/constants/champion';
 
 export default defineComponent({
+  name: 'DraggableBoard',
   components: {},
+
   data() {
     return {
-      champions: {},
+      champions: null as Champion[] | null,
+      CHAMPION_IMAGE_BASE_URL,
     };
   },
-  async mounted() {
-    const { data } = await fetchChampions();
-    this.champions = data;
+
+  computed: {
+    allChampions() {
+      return this.$store.state.common.champions;
+    },
   },
+
   methods: {
     handleDragStart(event: DragEvent) {
       const id = (event.target as HTMLImageElement).id;
@@ -73,32 +70,17 @@ export default defineComponent({
       //   dropTarget?.appendChild(image);
       // }
     },
+
+    selectChampion(championObj: Record<string, Champion>) {
+      const champions = Object.values(championObj);
+      const selected = shuffleAndSelect(champions, 16);
+      this.$data.champions = selected;
+    },
   },
 
-  computed: {
-    selectedChampions() {
-      const championsArr: Champion[] = Object.values(this.champions);
-      if (championsArr.length > 0) {
-        const result: SelectedChampion[] = [];
-
-        while (result.length < TOTAL) {
-          const index = Math.floor(Math.random() * championsArr.length);
-          const selected = championsArr[index];
-
-          const finded = result.find((champion) => champion.id === selected.id);
-
-          if (!finded)
-            result.push({
-              id: selected.id,
-              image: `${IMAGE_BASE_URL}${selected.image.full}`,
-              name: selected.name,
-            });
-        }
-        return result;
-      }
-
-      return [];
-    },
+  async mounted() {
+    await this.$store.dispatch('common/getChampions');
+    if (this.allChampions) this.selectChampion(this.allChampions);
   },
 });
 </script>

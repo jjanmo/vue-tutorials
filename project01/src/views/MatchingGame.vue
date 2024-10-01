@@ -1,17 +1,17 @@
 <template>
   <div>
-    <ChampionList />
+    <DraggableBoard />
   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue';
-import ChampionList from '@/components/matching/ChampionList.vue';
+import DraggableBoard from '@/components/matching/DraggableBoard.vue';
 
 export default defineComponent({
   name: 'Matching',
   components: {
-    ChampionList,
+    DraggableBoard,
   },
 });
 </script>
