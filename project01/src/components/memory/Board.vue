@@ -51,7 +51,7 @@ export default defineComponent({
   },
   async mounted() {
     await this.$store.dispatch('common/getChampions');
-    this.$store.commit('memory/setBoard', { champions: this.allChampions });
+    this.$store.commit('memory/setBoard', { championObj: this.allChampions });
   },
 });
 </script>

@@ -50,7 +50,7 @@ export default defineComponent({
     handleStartClick() {
       if (!this.isStarted) this.buttonText = '다시 시작하기';
 
-      this.$store.commit('memory/setBoard', { champions: this.allChampions });
+      this.$store.commit('memory/setBoard', { championObj: this.allChampions });
       this.$store.commit('memory/startGame');
       this.startTimer();
     },

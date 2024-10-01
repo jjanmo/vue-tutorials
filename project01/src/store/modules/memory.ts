@@ -43,16 +43,17 @@ const mutations = {
   },
 
   // board 초기화
-  setBoard(state: MemoryState, payload: { champions: CommonState['champions'] }) {
-    const converted = Object.values(payload.champions || {});
-    const baseCards: Champion[] = shuffleAndSelect<Champion>(converted, TOTAL_CARDS / 2);
-    const pairCards: Champion[] = shuffleAndSelect<Champion>(baseCards);
+  setBoard(state: MemoryState, payload: { championObj: CommonState['champions'] }) {
+    const champions = Object.values(payload.championObj || {});
+    const baseCards: Champion[] = shuffleAndSelect<Champion>(champions, TOTAL_CARDS / 2);
+    const pairCards: Champion[] = shuffleAndSelect<Champion>([...baseCards]);
     state.board = [...baseCards, ...pairCards];
   },
 
   /** 초기화 후 게임시작 */
   startGame(state: MemoryState) {
     //card 초기화
+    state.card?.target.classList.remove('is-flipped');
     state.card = null;
     state.totalCards.forEach((card) => card.target.classList.remove('is-flipped'));
     state.totalCards = [];
