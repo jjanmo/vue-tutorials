@@ -1,5 +1,12 @@
-import { ChampionsResponse } from '@/store/champion.type';
+import { Champion } from '@/store/modules/common';
 import axios from 'axios';
+
+export interface ChampionsResponse {
+  type: string;
+  format: string;
+  version: string;
+  data: Champion[];
+}
 
 export const fetchChampions = () => {
   return axios
