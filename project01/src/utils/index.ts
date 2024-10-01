@@ -1,35 +1,13 @@
-export const select = <T extends { id: string }>(array: T[], total: number) => {
-  const result: T[] = [];
-
-  while (result.length < total) {
-    const selectedIndex = Math.floor(Math.random() * array.length);
-    const isAlreadySelected = result.find((item) => item.id === array[selectedIndex].id);
-    if (!isAlreadySelected) result.push(array[selectedIndex]);
+/**
+ * @param array : array to shuffle
+ * @param count : number of elements to select, default is array length
+ * @returns : shuffled array
+ */
+export function shuffleAndSelect<T>(array: T[], count = array.length) {
+  for (let i = array.length - 1; i > 0; i--) {
+    const randomIndex = Math.floor(Math.random() * (i + 1));
+    [array[i], array[randomIndex]] = [array[randomIndex], array[i]];
   }
 
-  return result;
-};
-
-/** TODO 셔플 로직 변경 - 좀 더 효율적이게!! */
-export const shuffle = <T extends { id: string }>(array: T[]) => {
-  const result: T[] = [];
-  const total = array.length;
-  let currentIdx = 0; // 현재 idx
-
-  while (result.length < total) {
-    const selectedIdx = Math.floor(Math.random() * total); // 넣을 아이템 idx
-
-    const alreadySelected = result.find((item) => item.id === array[selectedIdx].id); // 이미 뽑은 아이템
-    const isSame = selectedIdx === currentIdx; // 같은 위치
-
-    if (currentIdx === total - 1 && !alreadySelected) result.push(array[selectedIdx]);
-    else {
-      if (!isSame && !alreadySelected) {
-        result.push(array[selectedIdx]);
-        currentIdx++;
-      }
-    }
-  }
-
-  return result;
-};
+  return array.slice(0, count);
+}
