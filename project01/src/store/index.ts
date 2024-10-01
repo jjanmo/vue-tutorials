@@ -4,6 +4,7 @@ import filter, { FilterState } from './modules/filter';
 import memory, { MemoryState } from './modules/memory';
 import modal, { ModalState } from './modules/modal';
 import common, { CommonState } from './modules/common';
+import matching, { MatchingState } from './modules/matching';
 
 const dev = process.env.NODE_ENV !== 'production';
 
@@ -13,6 +14,7 @@ export interface RootState {
   filter: FilterState;
   memory: MemoryState;
   modal: ModalState;
+  matching: MatchingState;
 }
 
 const store = createStore({
@@ -22,6 +24,7 @@ const store = createStore({
     filter,
     memory,
     modal,
+    matching,
   },
   strict: dev,
 });
