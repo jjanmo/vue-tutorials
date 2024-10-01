@@ -1,5 +1,6 @@
-import { Champion } from '@/store/modules/common';
 import axios from 'axios';
+import { Champion } from '@/store/modules/common';
+import { CHAMPION_API_VERSION } from '@/constants/champion';
 
 export interface ChampionsResponse {
   type: string;
@@ -10,6 +11,6 @@ export interface ChampionsResponse {
 
 export const fetchChampions = () => {
   return axios
-    .get<ChampionsResponse>(`http://ddragon.leagueoflegends.com/cdn/14.19.1/data/ko_KR/champion.json`)
+    .get<ChampionsResponse>(`http://ddragon.leagueoflegends.com/cdn/${CHAMPION_API_VERSION}/data/ko_KR/champion.json`)
     .then((res) => res.data);
 };
