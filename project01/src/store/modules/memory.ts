@@ -65,7 +65,7 @@ const mutations = {
 const actions = {
   getChampions: async (context: ActionContext<MemoryState, RootState>) => {
     const { data } = await fetchChampions();
-    const _champions = select(Object.values(data.data), TOTAL_CARDS / 2);
+    const _champions = select(Object.values(data), TOTAL_CARDS / 2);
     const champions = [..._champions, ...shuffle(_champions)];
     context.commit('setChampions', champions);
   },
