@@ -23,8 +23,8 @@ Vue2 + Typescript 조합으로 만드는 중에 수많은 오류를 마주하였
   - [x] 메모리 게임
   - [ ] 영화리스트 with 애니메이션
     - [참고](https://www.freecodecamp.org/news/animations-with-vuejs-transition-api/)
-    - 영화 리스트 + 좋아요 처리(localstorage 이용) 
- 
+    - 영화 리스트 + 좋아요 처리(localstorage 이용)
+
 </details>
 
 ## Project02 - Hacker News Clone
@@ -48,3 +48,7 @@ Vue2 + Typescript 조합으로 만드는 중에 수많은 오류를 마주하였
       -> URL이 외부URL일수도 내부URL 일수도 있음!
 - [x] ask 상세 페이지 구현
 - [ ] comment UI 및 노출하는 로직(재귀)
+
+## Project03 : Vue3 Basic
+
+> with [Vue3 완벽 마스터: 기초부터 실전까지(기본편)](https://www.inflearn.com/course/vue-%EC%99%84%EB%B2%BD-%EA%B8%B0%EB%B3%B8)
